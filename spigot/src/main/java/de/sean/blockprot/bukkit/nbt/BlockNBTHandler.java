@@ -106,7 +106,8 @@ public final class BlockNBTHandler extends FriendSupportingHandler<NBTCompound> 
         AsyncGuard.assertBlockAccess(block, "BlockNBTHandler.<init>");
         this.block = block;
 
-        if (BlockProt.getDefaultConfig().isLockableBlock(this.block.getType(), this.block.getWorld())) {
+        if (BlockProt.getDefaultConfig().isLockableBlock(this.block.getType(), this.block.getWorld())
+            || BlockProt.getDefaultConfig().isLockableDoor(this.block.getType(), this.block.getWorld())) {
             isTileEntity = false;
             container = new NBTBlock(block).getData();
         } else if (BlockProt.getDefaultConfig().isLockableTileEntity(this.block.getType(), this.block.getWorld())) {
@@ -564,6 +565,11 @@ public final class BlockNBTHandler extends FriendSupportingHandler<NBTCompound> 
             final BlockNBTHandler otherDoorHandler = new BlockNBTHandler(otherDoor);
             if (condition.test(otherDoorHandler)) {
                 otherDoorHandler.mergeHandler(this);
+                if (this.isProtected()) {
+                    ProtectedBlockCache.mark(otherDoor);
+                } else {
+                    ProtectedBlockCache.unmark(otherDoor);
+                }
             } else {
                 orElse.accept(otherDoorHandler);
             }
@@ -573,6 +579,11 @@ public final class BlockNBTHandler extends FriendSupportingHandler<NBTCompound> 
                 final BlockNBTHandler doubleChestHandler = new BlockNBTHandler(doubleChestState.getBlock());
                 if (condition.test(doubleChestHandler)) {
                     doubleChestHandler.mergeHandler(this);
+                    if (this.isProtected()) {
+                        ProtectedBlockCache.mark(doubleChestState.getBlock());
+                    } else {
+                        ProtectedBlockCache.unmark(doubleChestState.getBlock());
+                    }
                 } else {
                     orElse.accept(doubleChestHandler);
                 }
@@ -580,11 +591,15 @@ public final class BlockNBTHandler extends FriendSupportingHandler<NBTCompound> 
         } else if (BlockFamilyParser.getSubFamilyMembers(BlockFamilyParser.SubFamily.BED).contains(this.block.getType())) {
             final Block otherBedHalf = BlockUtil.getOtherBedHalf(this.block.getState());
             if (otherBedHalf == null) return;
-            // Guard: the adjacent bed half may be in an unloaded chunk on large servers.
             if (!otherBedHalf.getChunk().isLoaded()) return;
             final BlockNBTHandler otherBedHandler = new BlockNBTHandler(otherBedHalf);
             if (condition.test(otherBedHandler)) {
                 otherBedHandler.mergeHandler(this);
+                if (this.isProtected()) {
+                    ProtectedBlockCache.mark(otherBedHalf);
+                } else {
+                    ProtectedBlockCache.unmark(otherBedHalf);
+                }
             } else {
                 orElse.accept(otherBedHandler);
             }

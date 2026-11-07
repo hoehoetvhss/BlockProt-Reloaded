@@ -23,22 +23,36 @@ package de.sean.blockprot.bukkit.listeners;
 import de.sean.blockprot.bukkit.BlockProt;
 import de.sean.blockprot.bukkit.nbt.BlockNBTHandler;
 import de.sean.blockprot.bukkit.storage.ProtectedBlockCache;
+import de.sean.blockprot.bukkit.util.BlockUtil;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockRedstoneEvent;
 
-/**
- * Blocks redstone current from affecting protected blocks when the redstone protection toggle is on.
- */
 public class RedstoneEventListener implements Listener {
     @EventHandler
     public void onRedstone(BlockRedstoneEvent event) {
-        if (BlockProt.getDefaultConfig().isWorldExcluded(event.getBlock().getWorld())) return;
-        if (!BlockProt.getDefaultConfig().isLockable(event.getBlock().getType(), event.getBlock().getWorld())) return;
-        if (!ProtectedBlockCache.isProtected(event.getBlock())) return;
-        final BlockNBTHandler handler = new BlockNBTHandler(event.getBlock());
-        if (handler.isProtected() && handler.getRedstoneHandler().getCurrentProtection()) {
-            event.setNewCurrent(0);
+        Block block = event.getBlock();
+        if (BlockProt.getDefaultConfig().isWorldExcluded(block.getWorld())) return;
+
+        Block checkBlock = block;
+        if (BlockProt.getDefaultConfig().isLockableDoor(block.getType(), block.getWorld())) {
+            if (!ProtectedBlockCache.isProtected(checkBlock)) {
+                Block other = BlockUtil.getOtherDoorHalf(checkBlock.getState());
+                if (other != null && ProtectedBlockCache.isProtected(other)) {
+                    checkBlock = other;
+                }
+            }
         }
+
+        if (!BlockProt.getDefaultConfig().isLockable(checkBlock.getType(), checkBlock.getWorld())) return;
+        if (!ProtectedBlockCache.isProtected(checkBlock)) return;
+
+        try {
+            BlockNBTHandler handler = new BlockNBTHandler(checkBlock);
+            if (handler.isProtected() && handler.getRedstoneHandler().getCurrentProtection()) {
+                event.setNewCurrent(0);
+            }
+        } catch (RuntimeException ignored) {}
     }
 }
