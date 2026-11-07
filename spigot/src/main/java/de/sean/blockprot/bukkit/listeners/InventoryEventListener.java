@@ -32,6 +32,7 @@ import de.sean.blockprot.bukkit.nbt.BlockNBTHandler;
 import de.sean.blockprot.bukkit.nbt.EntityNBTHandler;
 import de.sean.blockprot.bukkit.nbt.FriendHandler;
 import de.sean.blockprot.bukkit.BlockProtLogger;
+import de.sean.blockprot.bukkit.storage.ProtectedBlockCache;
 import de.sean.blockprot.bukkit.util.ComponentMessages;
 import de.sean.blockprot.bukkit.util.RegionTasks;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -188,7 +189,18 @@ public class InventoryEventListener implements Listener {
 
     @EventHandler
     public void onLecternClick(@NotNull PlayerTakeLecternBookEvent event) {
-        final var handler = new BlockNBTHandler(event.getLectern().getBlock());
+        final var block = event.getLectern().getBlock();
+        if (BlockProt.getDefaultConfig().isWorldExcluded(block.getWorld())) return;
+        if (!BlockProt.getDefaultConfig().isLockable(block.getType(), block.getWorld())) return;
+        if (!ProtectedBlockCache.isProtected(block)) return;
+
+        final BlockNBTHandler handler;
+        try {
+            handler = new BlockNBTHandler(block);
+        } catch (RuntimeException ignored) {
+            return;
+        }
+
         final var uuid = event.getPlayer().getUniqueId();
 
         if (handler.isProtected() && !handler.isOwner(uuid)) {
