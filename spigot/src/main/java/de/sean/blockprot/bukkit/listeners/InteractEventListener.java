@@ -21,10 +21,13 @@
 package de.sean.blockprot.bukkit.listeners;
 
 import de.sean.blockprot.bukkit.*;
+import de.sean.blockprot.bukkit.config.BlockFamilyParser;
 import de.sean.blockprot.bukkit.dialogs.BlockLockDialog;
 import de.sean.blockprot.bukkit.events.BlockAccessEvent;
 import de.sean.blockprot.bukkit.nbt.BlockNBTHandler;
 import de.sean.blockprot.bukkit.nbt.PlayerSettingsHandler;
+import de.sean.blockprot.bukkit.storage.ProtectedBlockCache;
+import de.sean.blockprot.bukkit.util.BlockUtil;
 import de.sean.blockprot.bukkit.util.ComponentMessages;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
@@ -32,6 +35,7 @@ import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -100,7 +104,8 @@ public class InteractEventListener implements Listener {
                 event.setCancelled(true);
                 sendMessage(player, Translator.get(TranslationKey.MESSAGES__NO_PERMISSION));
             } else if (!accessEvent.shouldBypassProtections()) {
-                BlockNBTHandler handler = new BlockNBTHandler(event.getClickedBlock());
+                Block clickedBlock = resolveSynchronizedBlock(event.getClickedBlock());
+                BlockNBTHandler handler = new BlockNBTHandler(clickedBlock);
                 if (handler.isProtected() && !handler.isOwner(player.getUniqueId())) {
                     String ownerUuidStr = handler.getOwner();
                     String ownerName = null;
@@ -165,7 +170,8 @@ public class InteractEventListener implements Listener {
                 return;
             }
 
-            BlockNBTHandler blockHandler = new BlockNBTHandler(event.getClickedBlock());
+            Block targetBlock = resolveSynchronizedBlock(event.getClickedBlock());
+            BlockNBTHandler blockHandler = new BlockNBTHandler(targetBlock);
             if (blockHandler.isProtected() && !blockHandler.isOwner(player.getUniqueId())
                     && !de.sean.blockprot.bukkit.admin.AdminTierManager.hasPermission(player, de.sean.blockprot.bukkit.admin.AdminAction.UNLOCK)
                     && !de.sean.blockprot.bukkit.admin.AdminTierManager.hasPermission(player, de.sean.blockprot.bukkit.admin.AdminAction.INFO)) {
@@ -178,13 +184,13 @@ public class InteractEventListener implements Listener {
 
             if (de.sean.blockprot.bukkit.bedrock.BedrockBridge.shouldUseBedrockForms(player)) {
                 new PlayerSettingsHandler(player).setHasPlayerInteractedWithMenu(true);
-                de.sean.blockprot.bukkit.bedrock.forms.BedrockBlockLockForm.show(player, event.getClickedBlock(), new de.sean.blockprot.bukkit.nbt.BlockNBTHandler(event.getClickedBlock()));
+                de.sean.blockprot.bukkit.bedrock.forms.BedrockBlockLockForm.show(player, targetBlock, new de.sean.blockprot.bukkit.nbt.BlockNBTHandler(targetBlock));
             } else if (BlockProt.getDefaultConfig().shouldUseDialogs(player)) {
-                BlockLockDialog.showBlock(player, event.getClickedBlock());
+                BlockLockDialog.showBlock(player, targetBlock);
             } else {
                 BlockProtAPI api = BlockProtAPI.getInstance();
                 if (api == null) return;
-                Inventory inv = api.getLockInventoryForBlock(event.getClickedBlock(), player);
+                Inventory inv = api.getLockInventoryForBlock(targetBlock, player);
                 if (inv == null) {
                     sendMessage(player, Translator.get(TranslationKey.MESSAGES__NO_PERMISSION));
                 } else {
@@ -193,6 +199,41 @@ public class InteractEventListener implements Listener {
                 }
             }
         }
+    }
+
+    private Block resolveSynchronizedBlock(@NotNull Block block) {
+        if (BlockProt.getDefaultConfig().isLockableDoor(block.getType(), block.getWorld())) {
+            Block other = BlockUtil.getOtherDoorHalf(block.getState());
+            if (other != null && other.getType() == block.getType()) {
+                BlockNBTHandler hBlock = new BlockNBTHandler(block);
+                BlockNBTHandler hOther = new BlockNBTHandler(other);
+                if (!hBlock.isProtected() && hOther.isProtected()) {
+                    hBlock.mergeHandler(hOther);
+                    ProtectedBlockCache.mark(block);
+                    return other;
+                } else if (hBlock.isProtected() && !hOther.isProtected()) {
+                    hOther.mergeHandler(hBlock);
+                    ProtectedBlockCache.mark(other);
+                    return block;
+                }
+            }
+        } else if (BlockFamilyParser.getSubFamilyMembers(BlockFamilyParser.SubFamily.BED).contains(block.getType())) {
+            Block other = BlockUtil.getOtherBedHalf(block.getState());
+            if (other != null && other.getType() == block.getType()) {
+                BlockNBTHandler hBlock = new BlockNBTHandler(block);
+                BlockNBTHandler hOther = new BlockNBTHandler(other);
+                if (!hBlock.isProtected() && hOther.isProtected()) {
+                    hBlock.mergeHandler(hOther);
+                    ProtectedBlockCache.mark(block);
+                    return other;
+                } else if (hBlock.isProtected() && !hOther.isProtected()) {
+                    hOther.mergeHandler(hBlock);
+                    ProtectedBlockCache.mark(other);
+                    return block;
+                }
+            }
+        }
+        return block;
     }
 
     private void sendMessage(@NotNull Player player, @NotNull String text) {

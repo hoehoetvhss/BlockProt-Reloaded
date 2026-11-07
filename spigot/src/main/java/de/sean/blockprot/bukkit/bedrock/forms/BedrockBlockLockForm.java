@@ -92,8 +92,7 @@ public final class BedrockBlockLockForm {
             String unlockBtn = stripColor(Translator.get(TranslationKey.INVENTORIES__UNLOCK));
             builder.button(unlockBtn, FormImage.Type.PATH, "textures/ui/cancel");
             actions.add(() -> {
-                handler.clear();
-                handler.applyToOtherContainer();
+                handler.lockBlock(player);
                 ComponentMessages.sendLegacy(player, Translator.get(TranslationKey.MESSAGES__UNLOCKED));
                 show(player, block, handler);
             });

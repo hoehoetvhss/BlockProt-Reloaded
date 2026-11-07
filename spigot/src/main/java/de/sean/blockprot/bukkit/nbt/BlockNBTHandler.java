@@ -559,9 +559,8 @@ public final class BlockNBTHandler extends FriendSupportingHandler<NBTCompound> 
         if (BlockProt.getDefaultConfig().isLockableDoor(block.getType(), block.getWorld())) {
             final Block otherDoor = BlockUtil.getOtherDoorHalf(block.getState());
             if (otherDoor == null) return;
-            // Guard: the adjacent door half may be in an unloaded chunk on large servers.
-            // Constructing BlockNBTHandler on an unloaded chunk causes NbtApiException.
             if (!otherDoor.getChunk().isLoaded()) return;
+            if (otherDoor.getType() != block.getType()) return;
             final BlockNBTHandler otherDoorHandler = new BlockNBTHandler(otherDoor);
             if (condition.test(otherDoorHandler)) {
                 otherDoorHandler.mergeHandler(this);
@@ -592,6 +591,7 @@ public final class BlockNBTHandler extends FriendSupportingHandler<NBTCompound> 
             final Block otherBedHalf = BlockUtil.getOtherBedHalf(this.block.getState());
             if (otherBedHalf == null) return;
             if (!otherBedHalf.getChunk().isLoaded()) return;
+            if (otherBedHalf.getType() != block.getType()) return;
             final BlockNBTHandler otherBedHandler = new BlockNBTHandler(otherBedHalf);
             if (condition.test(otherBedHandler)) {
                 otherBedHandler.mergeHandler(this);

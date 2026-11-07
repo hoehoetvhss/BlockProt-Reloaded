@@ -153,15 +153,10 @@ public final class BlockLockDialog {
                     : stripColor(Translator.get(TranslationKey.INVENTORIES__UNLOCK)),
                 NamedTextColor.WHITE,
                 p -> {
-                    if (isNotProtected) {
-                        LockReturnValue ret = handler.lockBlock(p);
-                        if (!ret.success && ret.reason != null) {
-                            ComponentMessages.sendActionBar(p, LegacyComponentSerializer.legacySection().deserialize(
-                                Translator.get(ret.reason)));
-                        }
-                    } else {
-                        handler.clear();
-                        handler.applyToOtherContainer();
+                    LockReturnValue ret = handler.lockBlock(p);
+                    if (!ret.success && ret.reason != null) {
+                        ComponentMessages.sendActionBar(p, LegacyComponentSerializer.legacySection().deserialize(
+                            Translator.get(ret.reason)));
                     }
                     show(p, block, handler);
                 }

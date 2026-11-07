@@ -146,12 +146,25 @@ public class BlockEventListener implements Listener {
 
         if (!BlockProt.getDefaultConfig().isLockable(event.getBlock().getType(), event.getBlock().getWorld())) return;
 
-        if (!ProtectedBlockCache.isProtected(event.getBlock())) {
+        Block checkBlock = event.getBlock();
+        if (checkBlock.getBlockData() instanceof Door) {
+            Block other = BlockUtil.getOtherDoorHalf(checkBlock.getState());
+            if (other != null && !ProtectedBlockCache.isProtected(checkBlock) && ProtectedBlockCache.isProtected(other)) {
+                checkBlock = other;
+            }
+        } else if (checkBlock.getBlockData() instanceof Bed) {
+            Block other = BlockUtil.getOtherBedHalf(checkBlock.getState());
+            if (other != null && !ProtectedBlockCache.isProtected(checkBlock) && ProtectedBlockCache.isProtected(other)) {
+                checkBlock = other;
+            }
+        }
+
+        if (!ProtectedBlockCache.isProtected(checkBlock)) {
             HopperEventListener.invalidate(event.getBlock());
             return;
         }
 
-        BlockNBTHandler handler = new BlockNBTHandler(event.getBlock());
+        BlockNBTHandler handler = new BlockNBTHandler(checkBlock);
         final boolean isOwner = handler.isOwner(breaker.getUniqueId().toString());
 
         if (!isOwner && handler.isProtected()) {
@@ -185,8 +198,27 @@ public class BlockEventListener implements Listener {
                 StatHandler.markDirty();
             }
         }
+        ProtectedBlockCache.unmark(block);
         HopperEventListener.invalidate(block);
         handler.clear();
+
+        if (block.getBlockData() instanceof Door) {
+            Block other = BlockUtil.getOtherDoorHalf(block.getState());
+            if (other != null && other.getType() == block.getType()) {
+                ProtectedBlockCache.unmark(other);
+                try {
+                    new BlockNBTHandler(other).clear();
+                } catch (RuntimeException ignored) {}
+            }
+        } else if (block.getBlockData() instanceof Bed) {
+            Block other = BlockUtil.getOtherBedHalf(block.getState());
+            if (other != null && other.getType() == block.getType()) {
+                ProtectedBlockCache.unmark(other);
+                try {
+                    new BlockNBTHandler(other).clear();
+                } catch (RuntimeException ignored) {}
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -395,6 +427,12 @@ public class BlockEventListener implements Listener {
 
                             StatHandler.removeContainer(event.getPlayer(), block);
                         }
+                    } else if (BlockProt.getDefaultConfig().isLockableDoor(block.getType(), block.getWorld())) {
+                        handler.setName(BlockUtil.getHumanReadableBlockName(block.getType()));
+                        handler.applyToOtherContainer();
+                    } else if (BlockFamilyParser.getSubFamilyMembers(BlockFamilyParser.SubFamily.BED).contains(block.getType())) {
+                        handler.setName(BlockUtil.getHumanReadableBlockName(block.getType()));
+                        handler.applyToOtherContainer();
                     } else {
                         BlockState freshState = VersionCompat.getBlockState(block, true);
                         if (freshState instanceof org.bukkit.block.TileState) {
