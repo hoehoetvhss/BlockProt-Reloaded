@@ -55,6 +55,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.block.Container;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.type.Bed;
+import org.bukkit.block.data.type.Door;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -407,14 +408,61 @@ public class BlockEventListener implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockPhysics(@NotNull final BlockPhysicsEvent event) {
-        if (event.getChangedType().toString().contains("ANVIL") &&
-            BlockProt.getDefaultConfig().isLockableBlock(event.getChangedType(), event.getBlock().getWorld())) {
-            BlockNBTHandler handler = new BlockNBTHandler(event.getBlock());
+        Block block = event.getBlock();
+        if (BlockProt.getDefaultConfig().isWorldExcluded(block.getWorld())) return;
 
-            if (handler.isProtected())
-                event.setCancelled(true);
+        if (event.getChangedType().toString().contains("ANVIL") &&
+            BlockProt.getDefaultConfig().isLockableBlock(event.getChangedType(), block.getWorld())) {
+            BlockNBTHandler handler = new BlockNBTHandler(block);
+            if (handler.isProtected()) event.setCancelled(true);
+            return;
+        }
+
+        org.bukkit.block.data.BlockData data = block.getBlockData();
+        if (data instanceof org.bukkit.block.data.Openable) {
+            Block checkBlock = block;
+            if (data instanceof Door) {
+                if (!ProtectedBlockCache.isProtected(checkBlock)) {
+                    Block other = BlockUtil.getOtherDoorHalf(checkBlock.getState());
+                    if (other != null && ProtectedBlockCache.isProtected(other)) {
+                        checkBlock = other;
+                    }
+                }
+            }
+
+            if (BlockProt.getDefaultConfig().isLockable(checkBlock.getType(), checkBlock.getWorld())
+                && ProtectedBlockCache.isProtected(checkBlock)) {
+                try {
+                    BlockNBTHandler handler = new BlockNBTHandler(checkBlock);
+                    if (handler.isProtected() && handler.getRedstoneHandler().getCurrentProtection()) {
+                        Block other = (data instanceof Door) ? BlockUtil.getOtherDoorHalf(block.getState()) : null;
+                        boolean isInternalDoorUpdate = event.getSourceBlock().equals(block)
+                            || (other != null && event.getSourceBlock().equals(other));
+
+                        if (!isInternalDoorUpdate) {
+                            boolean hasPower = block.isBlockPowered() || block.isBlockIndirectlyPowered()
+                                || (other != null && (other.isBlockPowered() || other.isBlockIndirectlyPowered()))
+                                || event.getSourceBlock().isBlockPowered() || event.getSourceBlock().isBlockIndirectlyPowered()
+                                || event.getSourceBlock().getBlockPower() > 0;
+
+                            if (hasPower) {
+                                event.setCancelled(true);
+                                org.bukkit.block.data.Openable openable = (org.bukkit.block.data.Openable) data;
+                                if (openable.isOpen()) {
+                                    openable.setOpen(false);
+                                    block.setBlockData(openable, false);
+                                    if (other != null && other.getBlockData() instanceof org.bukkit.block.data.Openable otherOpenable) {
+                                        otherOpenable.setOpen(false);
+                                        other.setBlockData(otherOpenable, false);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch (RuntimeException ignored) {}
+            }
         }
     }
 

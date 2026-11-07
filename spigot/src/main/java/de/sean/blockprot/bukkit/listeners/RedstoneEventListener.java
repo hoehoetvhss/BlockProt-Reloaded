@@ -25,11 +25,18 @@ import de.sean.blockprot.bukkit.nbt.BlockNBTHandler;
 import de.sean.blockprot.bukkit.storage.ProtectedBlockCache;
 import de.sean.blockprot.bukkit.util.BlockUtil;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.type.Door;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockRedstoneEvent;
+import org.jetbrains.annotations.NotNull;
 
 public class RedstoneEventListener implements Listener {
+    private static final BlockFace[] NEIGHBOR_FACES = new BlockFace[]{
+        BlockFace.UP, BlockFace.DOWN, BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST
+    };
+
     @EventHandler
     public void onRedstone(BlockRedstoneEvent event) {
         Block block = event.getBlock();
@@ -45,14 +52,55 @@ public class RedstoneEventListener implements Listener {
             }
         }
 
-        if (!BlockProt.getDefaultConfig().isLockable(checkBlock.getType(), checkBlock.getWorld())) return;
-        if (!ProtectedBlockCache.isProtected(checkBlock)) return;
+        if (BlockProt.getDefaultConfig().isLockable(checkBlock.getType(), checkBlock.getWorld())
+            && ProtectedBlockCache.isProtected(checkBlock)) {
+            try {
+                BlockNBTHandler handler = new BlockNBTHandler(checkBlock);
+                if (handler.isProtected() && handler.getRedstoneHandler().getCurrentProtection()) {
+                    event.setNewCurrent(0);
+                    return;
+                }
+            } catch (RuntimeException ignored) {}
+        }
 
-        try {
-            BlockNBTHandler handler = new BlockNBTHandler(checkBlock);
-            if (handler.isProtected() && handler.getRedstoneHandler().getCurrentProtection()) {
-                event.setNewCurrent(0);
+        if (event.getNewCurrent() > 0) {
+            for (BlockFace face : NEIGHBOR_FACES) {
+                Block neighbor = block.getRelative(face);
+                if (isProtectedRedstoneGuarded(neighbor)) {
+                    event.setNewCurrent(0);
+                    return;
+                }
             }
-        } catch (RuntimeException ignored) {}
+            org.bukkit.block.data.BlockData data = block.getBlockData();
+            if (data instanceof org.bukkit.block.data.Directional dir) {
+                Block attached = block.getRelative(dir.getFacing().getOppositeFace());
+                for (BlockFace face : NEIGHBOR_FACES) {
+                    Block neighbor = attached.getRelative(face);
+                    if (isProtectedRedstoneGuarded(neighbor)) {
+                        event.setNewCurrent(0);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isProtectedRedstoneGuarded(@NotNull Block block) {
+        if (!ProtectedBlockCache.isProtected(block)) {
+            if (block.getBlockData() instanceof Door) {
+                Block other = BlockUtil.getOtherDoorHalf(block.getState());
+                if (other == null || !ProtectedBlockCache.isProtected(other)) return false;
+                block = other;
+            } else {
+                return false;
+            }
+        }
+        if (!BlockProt.getDefaultConfig().isLockable(block.getType(), block.getWorld())) return false;
+        try {
+            BlockNBTHandler handler = new BlockNBTHandler(block);
+            return handler.isProtected() && handler.getRedstoneHandler().getCurrentProtection();
+        } catch (RuntimeException ignored) {
+            return false;
+        }
     }
 }
