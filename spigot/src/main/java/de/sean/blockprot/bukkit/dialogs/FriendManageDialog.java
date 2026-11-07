@@ -145,16 +145,26 @@ public final class FriendManageDialog {
                 Consumer<String> handleName = text -> {
                     BlockProt.getFoliaLib().getScheduler().runAsync(asyncTask -> {
                         double minimumSimilarity = BlockProt.getDefaultConfig().getFriendSearchSimilarityPercentage();
-                        var match = de.sean.blockprot.bukkit.util.PlayerLookup.findBestMatch(text, minimumSimilarity, p.getUniqueId());
-                        if (match != null) {
+                        var matches = de.sean.blockprot.bukkit.util.PlayerLookup.findCandidates(text, minimumSimilarity, 18, p.getUniqueId());
+                        if (matches.isEmpty()) {
+                            ComponentMessages.sendActionBar(p, net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserialize(
+                                Translator.get(TranslationKey.MESSAGES__FRIEND_PLAYER_NOT_FOUND)));
+                            RegionTasks.runFor(p, () -> showForBlock(p, block, handler, safePage));
+                        } else if (matches.size() == 1) {
+                            var match = matches.get(0);
                             BlockProt.getFoliaLib().getScheduler().runAtLocation(block.getLocation(), syncTask -> {
-                                handler.addFriend(match.getKey().toString());
+                                handler.addFriend(match.uuid().toString());
                                 handler.applyToOtherContainer();
                                 RegionTasks.runFor(p, () -> showForBlock(p, block, handler, safePage));
                             });
                         } else {
-                            ComponentMessages.sendActionBar(p, net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserialize(
-                                Translator.get(TranslationKey.MESSAGES__FRIEND_PLAYER_NOT_FOUND)));
+                            RegionTasks.runFor(p, () -> FriendCandidateSelectionDialog.show(p, matches, selected -> {
+                                BlockProt.getFoliaLib().getScheduler().runAtLocation(block.getLocation(), syncTask -> {
+                                    handler.addFriend(selected.uuid().toString());
+                                    handler.applyToOtherContainer();
+                                    RegionTasks.runFor(p, () -> showForBlock(p, block, handler, safePage));
+                                });
+                            }, () -> showForBlock(p, block, handler, safePage)));
                         }
                     });
                 };
@@ -202,31 +212,53 @@ public final class FriendManageDialog {
     }
 
     public static void show(@NotNull Player player) {
-        show(player, DialogOrigin.USER_MENU);
+        show(player, DialogOrigin.USER_MENU, 0);
     }
 
     public static void show(@NotNull Player player, @NotNull DialogOrigin backOrigin) {
+        show(player, backOrigin, 0);
+    }
+
+    public static void show(@NotNull Player player, @NotNull DialogOrigin backOrigin, int page) {
         DialogBridge bridge = DialogBridgeFactory.getBridge();
         if (bridge == null) return;
 
         PlayerSettingsHandler handler = new PlayerSettingsHandler(player);
-        boolean isPublic = handler.containsFriend(FriendSupportingHandler.publicUuid.toString());
+        List<FriendHandler> allFriends = handler.getFriends();
+        List<FriendHandler> realFriends = allFriends.stream().filter(f -> !f.doesRepresentPublic()).toList();
+        boolean isPublic = allFriends.stream().anyMatch(FriendHandler::doesRepresentPublic);
+
+        int totalPages = Math.max(1, (int) Math.ceil(realFriends.size() / 3.0));
+        int safePage = Math.max(0, Math.min(page, totalPages - 1));
+        int from = safePage * 3;
+        int to = Math.min(from + 3, realFriends.size());
+        List<FriendHandler> pageFriends = realFriends.subList(from, to);
 
         Component title = Component.text(
             stripColor(Translator.get(TranslationKey.INVENTORIES__FRIENDS__MANAGE)),
             PASTEL_PURPLE, TextDecoration.BOLD
         );
 
-        String search = stripColor(Translator.get(TranslationKey.INVENTORIES__FRIENDS__SEARCH));
         String history = stripColor(Translator.get(TranslationKey.INVENTORIES__FRIENDS__SEARCH_HISTORY));
         String makePublic = stripColor(Translator.get(TranslationKey.INVENTORIES__FRIENDS__MAKE_PUBLIC));
 
-        boolean colorblind = new PlayerSettingsHandler(player).getColorblindMode();
+        boolean colorblind = handler.getColorblindMode();
         List<DialogBodyEntry> body = new ArrayList<>();
         body.add(DialogBodyEntry.text(Component.text(
             stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__HEADER)), SOFT_GRAY)));
-        body.add(DialogBodyEntry.text(Component.text(
-            stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__MANAGE_HINT)), TextColor.color(0x888888))));
+
+        if (realFriends.isEmpty()) {
+            body.add(DialogBodyEntry.text(Component.text(
+                stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__NO_HISTORY)),
+                TextColor.color(0x888888))));
+        } else {
+            body.add(DialogBodyEntry.text(Component.text(
+                stripColor(Translator.get(TranslationKey.DIALOGS__PAGE))
+                    .replace("{current}", String.valueOf(safePage + 1))
+                    .replace("{total}", String.valueOf(totalPages)),
+                TextColor.color(0x888888))));
+        }
+
         body.add(DialogBodyEntry.text(Component.empty()));
         String statusStr = stripColor(Translator.get(isPublic
             ? TranslationKey.DIALOGS__STATUS_PUBLIC
@@ -238,16 +270,83 @@ public final class FriendManageDialog {
             .append(Component.text(statusIcon + statusStr, statusColor))
             .build()));
 
-        DialogButton searchBtn = new DialogButton("search",
-            Component.text(stripColor(Translator.get(TranslationKey.ICON__SEARCH)) + search, NamedTextColor.WHITE),
-            tooltip(stripColor(Translator.get(TranslationKey.INVENTORIES__FRIENDS__SEARCH)), SOFT_BLUE),
+        List<DialogButton> buttons = new ArrayList<>();
+
+        for (FriendHandler fh : pageFriends) {
+            String uuidStr = fh.getName();
+            String name = getPlayerName(uuidStr);
+            String displayName = name != null ? name : uuidStr;
+            String levelDesc = FriendDetailDialog.getLevelName(fh.getLevel());
+
+            buttons.add(new DialogButton("friend_" + uuidStr,
+                Component.text(displayName, NamedTextColor.WHITE),
+                Component.join(JoinConfiguration.newlines(),
+                    Component.text(levelDesc, PASTEL_GOLD),
+                    Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__CLICK_TO_OPEN)), TextColor.color(0x888888))),
+                p -> FriendDetailDialog.showForPlayer(p, uuidStr, safePage, backOrigin)
+            ));
+        }
+
+        DialogButton prevBtn = safePage > 0
+            ? new DialogButton("prev",
+                Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__PREV)), SOFT_GRAY),
+                Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__PREV_HINT)), TextColor.color(0x888888)),
+                p -> show(p, backOrigin, safePage - 1))
+            : new DialogButton("prev_disabled",
+                Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__PREV)), TextColor.color(0x555555)),
+                Component.text(""),
+                p -> {});
+
+        DialogButton addBtn = new DialogButton("add",
+            Component.text(stripColor(Translator.get(TranslationKey.INVENTORIES__FRIENDS__SEARCH)), NamedTextColor.WHITE),
+            Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__MANAGE_HINT)), TextColor.color(0x888888)),
             p -> {
+                Consumer<String> handleName = text -> {
+                    BlockProt.getFoliaLib().getScheduler().runAsync(asyncTask -> {
+                        double minimumSimilarity = BlockProt.getDefaultConfig().getFriendSearchSimilarityPercentage();
+                        var matches = de.sean.blockprot.bukkit.util.PlayerLookup.findCandidates(text, minimumSimilarity, 18, p.getUniqueId());
+                        if (matches.isEmpty()) {
+                            ComponentMessages.sendActionBar(p, net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserialize(
+                                Translator.get(TranslationKey.MESSAGES__FRIEND_PLAYER_NOT_FOUND)));
+                            RegionTasks.runFor(p, () -> show(p, backOrigin, safePage));
+                        } else if (matches.size() == 1) {
+                            var match = matches.get(0);
+                            RegionTasks.runFor(p, () -> {
+                                handler.addFriend(match.uuid().toString());
+                                handler.addPlayerToSearchHistory(match.uuid());
+                                show(p, backOrigin, safePage);
+                            });
+                        } else {
+                            RegionTasks.runFor(p, () -> FriendCandidateSelectionDialog.show(p, matches, selected -> {
+                                RegionTasks.runFor(p, () -> {
+                                    handler.addFriend(selected.uuid().toString());
+                                    handler.addPlayerToSearchHistory(selected.uuid());
+                                    show(p, backOrigin, safePage);
+                                });
+                            }, () -> show(p, backOrigin, safePage)));
+                        }
+                    });
+                };
                 bridge.closeDialog(p);
-                de.sean.blockprot.bukkit.inventories.FriendSearchInventory.openChatInput(p);
+                openFriendNameInput(p, handleName);
             }
         );
 
-        DialogButton historyBtn = new DialogButton("history",
+        DialogButton nextBtn = safePage + 1 < totalPages
+            ? new DialogButton("next",
+                Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__NEXT)), SOFT_GRAY),
+                Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__NEXT_HINT)), TextColor.color(0x888888)),
+                p -> show(p, backOrigin, safePage + 1))
+            : new DialogButton("next_disabled",
+                Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__NEXT)), TextColor.color(0x555555)),
+                Component.text(""),
+                p -> {});
+
+        buttons.add(prevBtn);
+        buttons.add(addBtn);
+        buttons.add(nextBtn);
+
+        buttons.add(new DialogButton("history",
             Component.text(stripColor(Translator.get(TranslationKey.ICON__HISTORY)) + history, NamedTextColor.WHITE),
             tooltip(stripColor(Translator.get(TranslationKey.INVENTORIES__FRIENDS__SEARCH_HISTORY)), PASTEL_GOLD),
             p -> {
@@ -263,9 +362,9 @@ public final class FriendManageDialog {
                     p.sendMessage(Component.text(" - ", SOFT_GRAY).append(Component.text(entry, NamedTextColor.WHITE)));
                 }
             }
-        );
+        ));
 
-        DialogButton publicBtn = new DialogButton("make_public",
+        buttons.add(new DialogButton("make_public",
             toggleLabel(makePublic, isPublic, colorblind, PASTEL_MINT, PASTEL_CORAL),
             publicTooltip(isPublic),
             p -> {
@@ -278,9 +377,9 @@ public final class FriendManageDialog {
                     h.addEveryoneAsFriend();
                     updateAllBlocksPublicStatus(p.getUniqueId(), true);
                 }
-                show(p, backOrigin);
+                show(p, backOrigin, safePage);
             }
-        );
+        ));
 
         DialogOrigin exitOrigin = DialogBridgeFactory.resolveOrigin(backOrigin);
         DialogButton exitBtn = new DialogButton("exit",
@@ -289,11 +388,7 @@ public final class FriendManageDialog {
             originBack(player, exitOrigin)
         );
 
-        List<DialogButton> actions = new ArrayList<>();
-        actions.add(searchBtn);
-        actions.add(historyBtn);
-        actions.add(publicBtn);
-        bridge.showMultiAction(player, title, body, actions, exitBtn, 1);
+        bridge.showMultiAction(player, title, body, buttons, exitBtn, 3);
     }
 
     private static String getPlayerName(String uuidStr) {

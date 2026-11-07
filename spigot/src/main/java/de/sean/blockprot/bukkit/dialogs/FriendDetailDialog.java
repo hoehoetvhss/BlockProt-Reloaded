@@ -232,6 +232,169 @@ public final class FriendDetailDialog {
         bridge.showMultiAction(player, title, body, buttons, backBtn, 2);
     }
 
+    public static void showForPlayer(@NotNull Player player, @NotNull String friendUuid, int page, @NotNull DialogOrigin origin) {
+        DialogBridge bridge = DialogBridgeFactory.getBridge();
+        if (bridge == null) return;
+
+        PlayerSettingsHandler settings = new PlayerSettingsHandler(player);
+        Optional<FriendHandler> opt = settings.getFriend(friendUuid);
+        if (opt.isEmpty()) {
+            FriendManageDialog.show(player, origin, page);
+            return;
+        }
+
+        FriendHandler friend = opt.get();
+        String friendName = getPlayerName(friendUuid);
+        String displayName = friendName != null ? friendName : friendUuid;
+        boolean colorblind = settings.getColorblindMode();
+
+        Component title = Component.text(
+            stripColor(Translator.get(TranslationKey.INVENTORIES__FRIENDS__EDIT)),
+            PASTEL_PURPLE, TextDecoration.BOLD
+        );
+
+        int currentLevel = friend.getLevel();
+        String levelName = getLevelName(currentLevel);
+
+        List<DialogBodyEntry> body = new ArrayList<>();
+        body.add(DialogBodyEntry.text(Component.text(displayName, NamedTextColor.WHITE, TextDecoration.BOLD)));
+        body.add(DialogBodyEntry.text(Component.text(
+            stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__LEVEL_LABEL)).replace("{level}", levelName),
+            PASTEL_GOLD
+        )));
+
+        List<DialogButton> buttons = new ArrayList<>();
+
+        buttons.add(new DialogButton("level_1",
+            levelButtonText(stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__LEVEL_BASIC)), currentLevel == FriendHandler.LEVEL_BASIC, colorblind),
+            Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__LEVEL_BASIC_DESC)), TextColor.color(0x888888)),
+            p -> {
+                friend.setLevel(FriendHandler.LEVEL_BASIC);
+                settings.notifyFriendsMutated();
+                showForPlayer(p, friendUuid, page, origin);
+            }
+        ));
+
+        buttons.add(new DialogButton("level_2",
+            levelButtonText(stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__LEVEL_OPERATOR)), currentLevel == FriendHandler.LEVEL_OPERATOR, colorblind),
+            Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__LEVEL_OPERATOR_DESC)), TextColor.color(0x888888)),
+            p -> {
+                friend.setLevel(FriendHandler.LEVEL_OPERATOR);
+                settings.notifyFriendsMutated();
+                showForPlayer(p, friendUuid, page, origin);
+            }
+        ));
+
+        buttons.add(new DialogButton("level_3",
+            levelButtonText(stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__LEVEL_MANAGER)), currentLevel == FriendHandler.LEVEL_MANAGER, colorblind),
+            Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__LEVEL_MANAGER_DESC)), TextColor.color(0x888888)),
+            p -> {
+                friend.setLevel(FriendHandler.LEVEL_MANAGER);
+                settings.notifyFriendsMutated();
+                showForPlayer(p, friendUuid, page, origin);
+            }
+        ));
+
+        buttons.add(new DialogButton("level_4",
+            levelButtonText(stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__LEVEL_CUSTOM)), currentLevel == FriendHandler.LEVEL_CUSTOM, colorblind),
+            Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__LEVEL_CUSTOM_DESC)), TextColor.color(0x888888)),
+            p -> {
+                friend.setLevel(FriendHandler.LEVEL_CUSTOM);
+                settings.notifyFriendsMutated();
+                showForPlayer(p, friendUuid, page, origin);
+            }
+        ));
+
+        if (currentLevel == FriendHandler.LEVEL_CUSTOM) {
+            addCustomFlagButton(buttons, friend, FriendHandler.FLAG_OPEN_MENU,
+                stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__FLAG_OPEN_MENU)),
+                colorblind, () -> {
+                    settings.notifyFriendsMutated();
+                    showForPlayer(player, friendUuid, page, origin);
+                });
+
+            addCustomFlagButton(buttons, friend, FriendHandler.FLAG_EDIT_SETTINGS,
+                stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__FLAG_EDIT_SETTINGS)),
+                colorblind, () -> {
+                    settings.notifyFriendsMutated();
+                    showForPlayer(player, friendUuid, page, origin);
+                });
+
+            addCustomFlagButton(buttons, friend, FriendHandler.FLAG_EDIT_NAME,
+                stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__FLAG_EDIT_NAME)),
+                colorblind, () -> {
+                    settings.notifyFriendsMutated();
+                    showForPlayer(player, friendUuid, page, origin);
+                });
+
+            addCustomFlagButton(buttons, friend, FriendHandler.FLAG_INSPECT,
+                stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__FLAG_INSPECT)),
+                colorblind, () -> {
+                    settings.notifyFriendsMutated();
+                    showForPlayer(player, friendUuid, page, origin);
+                });
+
+            addCustomFlagButton(buttons, friend, FriendHandler.FLAG_VIEW_AUDIT,
+                stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__FLAG_VIEW_AUDIT)),
+                colorblind, () -> {
+                    settings.notifyFriendsMutated();
+                    showForPlayer(player, friendUuid, page, origin);
+                });
+
+            addCustomFlagButton(buttons, friend, FriendHandler.FLAG_MANAGE_FRIENDS,
+                stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__FLAG_MANAGE_FRIENDS)),
+                colorblind, () -> {
+                    settings.notifyFriendsMutated();
+                    showForPlayer(player, friendUuid, page, origin);
+                });
+
+            addCustomFlagButton(buttons, friend, FriendHandler.FLAG_OPEN_CONTAINER,
+                stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__FLAG_OPEN_CONTAINER)),
+                colorblind, () -> {
+                    settings.notifyFriendsMutated();
+                    showForPlayer(player, friendUuid, page, origin);
+                });
+
+            addCustomFlagButton(buttons, friend, FriendHandler.FLAG_DEPOSIT,
+                stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__FLAG_DEPOSIT)),
+                colorblind, () -> {
+                    settings.notifyFriendsMutated();
+                    showForPlayer(player, friendUuid, page, origin);
+                });
+
+            addCustomFlagButton(buttons, friend, FriendHandler.FLAG_WITHDRAW,
+                stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__FLAG_WITHDRAW)),
+                colorblind, () -> {
+                    settings.notifyFriendsMutated();
+                    showForPlayer(player, friendUuid, page, origin);
+                });
+
+            addCustomFlagButton(buttons, friend, FriendHandler.FLAG_REDSTONE,
+                stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__FLAG_REDSTONE)),
+                colorblind, () -> {
+                    settings.notifyFriendsMutated();
+                    showForPlayer(player, friendUuid, page, origin);
+                });
+        }
+
+        buttons.add(new DialogButton("remove_friend",
+            Component.text(stripColor(Translator.get(TranslationKey.INVENTORIES__FRIENDS__REMOVE)), PASTEL_CORAL),
+            Component.text(stripColor(Translator.get(TranslationKey.INVENTORIES__FRIENDS__REMOVE)), TextColor.color(0x888888)),
+            p -> {
+                settings.removeFriend(friendUuid);
+                FriendManageDialog.show(p, origin, page);
+            }
+        ));
+
+        DialogButton backBtn = new DialogButton("back",
+            Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__BACK)), SOFT_GRAY),
+            Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__RETURN_PREVIOUS)), TextColor.color(0x888888)),
+            p -> FriendManageDialog.show(p, origin, page)
+        );
+
+        bridge.showMultiAction(player, title, body, buttons, backBtn, 2);
+    }
+
     private static void addCustomFlagButton(List<DialogButton> buttons, FriendHandler friend,
                                             int flag, String label, boolean colorblind, Runnable onToggle) {
         boolean active = friend.hasFlag(flag);

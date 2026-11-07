@@ -23,6 +23,7 @@ package de.sean.blockprot.bukkit.listeners;
 import de.sean.blockprot.bukkit.BlockProt;
 import de.sean.blockprot.bukkit.nbt.BlockNBTHandler;
 import de.sean.blockprot.bukkit.storage.ProtectedBlockCache;
+import de.sean.blockprot.bukkit.util.BlockUtil;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -40,7 +41,17 @@ public class PistonEventListener implements Listener {
         }
 
         for (Block block : event.getBlocks()) {
+            if (BlockUtil.getAttachedProtectedBlock(block) != null) {
+                event.setCancelled(true);
+                return;
+            }
+
             Block target = block.getRelative(event.getDirection());
+            if (BlockUtil.getAttachedProtectedBlock(target) != null) {
+                event.setCancelled(true);
+                return;
+            }
+
             if (ProtectedBlockCache.isProtected(target)
                     && BlockProt.getDefaultConfig().isLockable(target.getType(), target.getWorld())) {
                 BlockNBTHandler targetNbt = new BlockNBTHandler(target);
@@ -77,6 +88,11 @@ public class PistonEventListener implements Listener {
             return;
         }
         for (Block block : event.getBlocks()) {
+            if (BlockUtil.getAttachedProtectedBlock(block) != null) {
+                event.setCancelled(true);
+                return;
+            }
+
             if (!ProtectedBlockCache.isProtected(block)) continue;
 
             if (BlockProt.getDefaultConfig().isLockableShulkerBox(block.getType(), block.getWorld())) {

@@ -122,6 +122,27 @@ public class BlockEventListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockBreak(BlockBreakEvent event) {
         if (BlockProt.getDefaultConfig().isWorldExcluded(event.getBlock().getWorld())) return;
+
+        final Player breaker = event.getPlayer();
+        final boolean isAdmin = de.sean.blockprot.bukkit.admin.AdminTierManager.hasPermission(breaker, de.sean.blockprot.bukkit.admin.AdminAction.BREAK);
+
+        Block attached = BlockUtil.getAttachedProtectedBlock(event.getBlock());
+        if (attached != null) {
+            try {
+                BlockNBTHandler attachedHandler = new BlockNBTHandler(attached);
+                if (attachedHandler.isProtected() && !attachedHandler.isOwner(breaker.getUniqueId().toString())) {
+                    if (!isAdmin && !BlockProt.getDefaultConfig().shouldAllowBreakProtectedBlocks()) {
+                        event.setCancelled(true);
+                        de.sean.blockprot.bukkit.audit.AuditLogger audit = BlockProt.getAuditLogger();
+                        if (audit != null) {
+                            audit.log(breaker.getUniqueId(), breaker.getName(), event.getBlock().getLocation(), de.sean.blockprot.bukkit.audit.AuditLogger.Action.ACCESS_DENIED);
+                        }
+                        return;
+                    }
+                }
+            } catch (RuntimeException ignored) {}
+        }
+
         if (!BlockProt.getDefaultConfig().isLockable(event.getBlock().getType(), event.getBlock().getWorld())) return;
 
         if (!ProtectedBlockCache.isProtected(event.getBlock())) {
@@ -130,8 +151,6 @@ public class BlockEventListener implements Listener {
         }
 
         BlockNBTHandler handler = new BlockNBTHandler(event.getBlock());
-        final Player breaker = event.getPlayer();
-        final boolean isAdmin = de.sean.blockprot.bukkit.admin.AdminTierManager.hasPermission(breaker, de.sean.blockprot.bukkit.admin.AdminAction.BREAK);
         final boolean isOwner = handler.isOwner(breaker.getUniqueId().toString());
 
         if (!isOwner && handler.isProtected()) {

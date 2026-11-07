@@ -216,7 +216,10 @@ public final class PaperDialogBridge implements DialogBridge {
             (view, audience) -> {
                 if (!(audience instanceof Player p)) return;
                 String value = view.getText(field.key());
-                onSubmit.accept(value != null ? value : field.initialValue());
+                de.sean.blockprot.bukkit.BlockProt.getFoliaLib().getScheduler().runAtEntity(
+                    p,
+                    task -> onSubmit.accept(value != null ? value : field.initialValue())
+                );
             },
             CLICK_OPTIONS
         );
@@ -303,19 +306,19 @@ public final class PaperDialogBridge implements DialogBridge {
                 if ("search".equals(btn.id())) {
                     String currentText = view.getText(fieldKey);
                     final String query = currentText != null ? currentText : "";
-                    org.bukkit.Bukkit.getScheduler().runTask(
-                        de.sean.blockprot.bukkit.BlockProt.getInstance(),
-                        () -> onSearch.accept(query)
+                    de.sean.blockprot.bukkit.BlockProt.getFoliaLib().getScheduler().runAtEntity(
+                        player,
+                        task -> onSearch.accept(query)
                     );
                 } else if (handler != null) {
-                    org.bukkit.Bukkit.getScheduler().runTask(
-                        de.sean.blockprot.bukkit.BlockProt.getInstance(),
-                        () -> handler.handle(player)
+                    de.sean.blockprot.bukkit.BlockProt.getFoliaLib().getScheduler().runAtEntity(
+                        player,
+                        task -> handler.handle(player)
                     );
                 } else {
-                    org.bukkit.Bukkit.getScheduler().runTask(
-                        de.sean.blockprot.bukkit.BlockProt.getInstance(),
-                        () -> closeDialogOrInventory(player)
+                    de.sean.blockprot.bukkit.BlockProt.getFoliaLib().getScheduler().runAtEntity(
+                        player,
+                        task -> closeDialogOrInventory(player)
                     );
                 }
             },
@@ -335,7 +338,10 @@ public final class PaperDialogBridge implements DialogBridge {
             action = DialogAction.customClick(
                 (view, audience) -> {
                     if (audience instanceof Player player) {
-                        org.bukkit.Bukkit.getScheduler().runTask(de.sean.blockprot.bukkit.BlockProt.getInstance(), () -> closeDialogOrInventory(player));
+                        de.sean.blockprot.bukkit.BlockProt.getFoliaLib().getScheduler().runAtEntity(
+                            player,
+                            task -> closeDialogOrInventory(player)
+                        );
                     }
                 },
                 CLICK_OPTIONS
@@ -344,7 +350,10 @@ public final class PaperDialogBridge implements DialogBridge {
             action = DialogAction.customClick(
                 (view, audience) -> {
                     if (audience instanceof Player player) {
-                        org.bukkit.Bukkit.getScheduler().runTask(de.sean.blockprot.bukkit.BlockProt.getInstance(), () -> handler.handle(player));
+                        de.sean.blockprot.bukkit.BlockProt.getFoliaLib().getScheduler().runAtEntity(
+                            player,
+                            task -> handler.handle(player)
+                        );
                     }
                 },
                 CLICK_OPTIONS

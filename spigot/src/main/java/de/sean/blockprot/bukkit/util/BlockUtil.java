@@ -20,9 +20,13 @@
 
 package de.sean.blockprot.bukkit.util;
 
+import de.sean.blockprot.bukkit.BlockProt;
+import de.sean.blockprot.bukkit.nbt.BlockNBTHandler;
+import de.sean.blockprot.bukkit.storage.ProtectedBlockCache;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
@@ -143,5 +147,67 @@ public final class BlockUtil {
 
     public static @NotNull String getHumanReadableBlockName(@NotNull Material material) {
         return capitalizeFirstLetters(material.name());
+    }
+
+    public static @Nullable Block getAttachedProtectedBlock(@NotNull final Block block) {
+        if (BlockProt.getDefaultConfig().isWorldExcluded(block.getWorld())) return null;
+
+        Block up = block.getRelative(BlockFace.UP);
+        org.bukkit.block.data.BlockData upData = up.getBlockData();
+        if (upData instanceof Door door) {
+            if (door.getHalf() == Bisected.Half.BOTTOM) {
+                if (isProtectedLockable(up)) return up;
+                Block other = getOtherDoorHalf(up.getState());
+                if (other != null && isProtectedLockable(other)) return other;
+            }
+        } else if (upData instanceof Bed) {
+            if (isProtectedLockable(up)) return up;
+            Block other = getOtherBedHalf(up.getState());
+            if (other != null && isProtectedLockable(other)) return other;
+        } else if (upData instanceof org.bukkit.block.data.type.Sign && !(upData instanceof org.bukkit.block.data.type.WallSign)) {
+            if (isProtectedLockable(up)) return up;
+        } else if (upData instanceof org.bukkit.block.data.type.Lantern lantern && !lantern.isHanging()) {
+            if (isProtectedLockable(up)) return up;
+        } else if (upData instanceof org.bukkit.block.data.type.Bell bell && bell.getAttachment() == org.bukkit.block.data.type.Bell.Attachment.FLOOR) {
+            if (isProtectedLockable(up)) return up;
+        }
+
+        Block down = block.getRelative(BlockFace.DOWN);
+        org.bukkit.block.data.BlockData downData = down.getBlockData();
+        if (downData instanceof org.bukkit.block.data.type.Lantern lantern && lantern.isHanging()) {
+            if (isProtectedLockable(down)) return down;
+        } else if (downData instanceof org.bukkit.block.data.type.HangingSign && !(downData instanceof org.bukkit.block.data.type.WallHangingSign)) {
+            if (isProtectedLockable(down)) return down;
+        } else if (downData instanceof org.bukkit.block.data.type.Bell bell && bell.getAttachment() == org.bukkit.block.data.type.Bell.Attachment.CEILING) {
+            if (isProtectedLockable(down)) return down;
+        }
+
+        BlockFace[] horizontalFaces = new BlockFace[]{BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST};
+        for (BlockFace face : horizontalFaces) {
+            Block side = block.getRelative(face);
+            org.bukkit.block.data.BlockData sideData = side.getBlockData();
+            if (sideData instanceof org.bukkit.block.data.type.WallSign wallSign) {
+                if (wallSign.getFacing() == face && isProtectedLockable(side)) return side;
+            } else if (sideData instanceof org.bukkit.block.data.type.WallHangingSign wallHangingSign) {
+                if (wallHangingSign.getFacing() == face && isProtectedLockable(side)) return side;
+            } else if (sideData instanceof org.bukkit.block.data.type.TrapDoor trapDoor) {
+                if (trapDoor.getFacing() == face && isProtectedLockable(side)) return side;
+            } else if (sideData instanceof org.bukkit.block.data.type.Bell bell) {
+                if (bell.getAttachment() == org.bukkit.block.data.type.Bell.Attachment.SINGLE_WALL && bell.getFacing() == face && isProtectedLockable(side)) {
+                    return side;
+                }
+            }
+        }
+        return null;
+    }
+
+    private static boolean isProtectedLockable(@NotNull final Block block) {
+        if (!BlockProt.getDefaultConfig().isLockable(block.getType(), block.getWorld())) return false;
+        if (!ProtectedBlockCache.isProtected(block)) return false;
+        try {
+            return new BlockNBTHandler(block).isProtected();
+        } catch (RuntimeException ignored) {
+            return false;
+        }
     }
 }

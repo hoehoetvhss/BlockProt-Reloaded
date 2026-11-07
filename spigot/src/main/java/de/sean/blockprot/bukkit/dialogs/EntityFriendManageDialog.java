@@ -103,22 +103,31 @@ public final class EntityFriendManageDialog {
             Component.text(stripColor(Translator.get(TranslationKey.DIALOGS__FRIENDS__MANAGE_HINT)),
                 TextColor.color(0x888888)),
             p -> {
-                bridge.closeDialog(p);
                 Consumer<String> handleName = text -> {
                     BlockProt.getFoliaLib().getScheduler().runAsync(asyncTask -> {
                         double minimumSimilarity = BlockProt.getDefaultConfig().getFriendSearchSimilarityPercentage();
-                        var match = de.sean.blockprot.bukkit.util.PlayerLookup.findBestMatch(text, minimumSimilarity, p.getUniqueId());
-                        if (match != null) {
-                            BlockProt.getFoliaLib().getScheduler().runAtEntity(entity, syncTask -> {
-                                handler.addFriend(match.getKey().toString());
-                                RegionTasks.runFor(p, () -> show(p, entity, handler));
-                            });
-                        } else {
+                        var matches = de.sean.blockprot.bukkit.util.PlayerLookup.findCandidates(text, minimumSimilarity, 18, p.getUniqueId());
+                        if (matches.isEmpty()) {
                             ComponentMessages.sendActionBar(p, net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserialize(
                                 Translator.get(TranslationKey.MESSAGES__FRIEND_PLAYER_NOT_FOUND)));
+                            RegionTasks.runFor(p, () -> show(p, entity, handler, safePage));
+                        } else if (matches.size() == 1) {
+                            var match = matches.get(0);
+                            BlockProt.getFoliaLib().getScheduler().runAtEntity(entity, syncTask -> {
+                                handler.addFriend(match.uuid().toString());
+                                RegionTasks.runFor(p, () -> show(p, entity, handler, safePage));
+                            });
+                        } else {
+                            RegionTasks.runFor(p, () -> FriendCandidateSelectionDialog.show(p, matches, selected -> {
+                                BlockProt.getFoliaLib().getScheduler().runAtEntity(entity, syncTask -> {
+                                    handler.addFriend(selected.uuid().toString());
+                                    RegionTasks.runFor(p, () -> show(p, entity, handler, safePage));
+                                });
+                            }, () -> show(p, entity, handler, safePage)));
                         }
                     });
                 };
+                bridge.closeDialog(p);
                 de.sean.blockprot.bukkit.inventories.TextInput.open(p, BlockProt.getInstance(), handleName);
             }
         );
