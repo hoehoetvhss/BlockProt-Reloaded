@@ -161,42 +161,56 @@ public class BlockLockInventory extends BlockProtInventory {
             }
             closeAndOpen(player, null);
         } else {
+            var handler = getNbtHandlerOrNull(block);
+            if (handler == null) {
+                event.setCancelled(true);
+                return;
+            }
+            boolean isNotProtected = handler.isNotProtected();
+            boolean isOwner = handler.isOwner(player.getUniqueId());
+            boolean isAdmin = AdminTierManager.hasPermission(player, AdminAction.UNLOCK);
+            boolean isOwnerOrAdmin = isOwner || isAdmin;
+            boolean canManage = !isNotProtected && state.menuPermissions.contains(BlockAccessMenuEvent.MenuPermission.MANAGER);
+            boolean canReadLogs = isOwnerOrAdmin || AdminTierManager.hasPermission(player, AdminAction.LOGS);
+            boolean canSeeInfo = isAdmin || AdminTierManager.hasPermission(player, AdminAction.INFO);
+            boolean canInspect = canManage && (block.getState() instanceof InventoryHolder);
+
             switch (item.getType()) {
                 case PLAYER_HEAD -> {
+                    if (!canManage) break;
                     state.origin = InventoryState.MenuOrigin.BLOCK_LOCK;
                     state.originStack.push(InventoryState.MenuOrigin.BLOCK_LOCK);
                     closeAndOpen(player, new FriendManageInventory().fill(player));
                 }
                 case REDSTONE -> {
+                    if (!canManage) break;
                     state.origin = InventoryState.MenuOrigin.BLOCK_LOCK;
                     state.originStack.push(InventoryState.MenuOrigin.BLOCK_LOCK);
-                    var handler = getNbtHandlerOrNull(block);
-                    closeAndOpen(player, handler == null ? null : new RedstoneSettingsInventory().fill(player, state));
+                    closeAndOpen(player, new RedstoneSettingsInventory().fill(player, state));
                 }
                 case COMPASS -> {
+                    if (!canManage && !canSeeInfo) break;
                     state.origin = InventoryState.MenuOrigin.BLOCK_LOCK;
                     state.originStack.push(InventoryState.MenuOrigin.BLOCK_LOCK);
-                    var handler = getNbtHandlerOrNull(block);
-                    if (handler != null) closeAndOpen(player, new BlockInfoInventory().fill(player, handler));
+                    closeAndOpen(player, new BlockInfoInventory().fill(player, handler));
                 }
                 case OAK_SIGN -> {}
                 case KNOWLEDGE_BOOK -> {
-                    var handler = getNbtHandlerOrNull(block);
+                    if (!canManage) break;
                     var container = PlayerInventoryClipboard.get(player.getUniqueId().toString());
-                    if (handler != null && container != null) {
+                    if (container != null) {
                         handler.pasteNbt(container);
                         ComponentMessages.sendLegacyActionBar(player, Translator.get(TranslationKey.MESSAGES__PASTE_DONE));
                     }
                 }
                 case PAPER -> {
-                    var handler = getNbtHandlerOrNull(block);
-                    if (handler != null) {
-                        PlayerInventoryClipboard.set(player.getUniqueId().toString(), handler.getNbtCopy());
-                        ComponentMessages.sendLegacyActionBar(player, Translator.get(TranslationKey.MESSAGES__COPY_DONE));
-                        closeAndOpen(player, null);
-                    }
+                    if (!canManage) break;
+                    PlayerInventoryClipboard.set(player.getUniqueId().toString(), handler.getNbtCopy());
+                    ComponentMessages.sendLegacyActionBar(player, Translator.get(TranslationKey.MESSAGES__COPY_DONE));
+                    closeAndOpen(player, null);
                 }
                 case NAME_TAG -> {
+                    if (!canManage) break;
                     player.closeInventory();
                     final Block nameBlock = block;
                     Consumer<String> handleName = text -> {
@@ -208,22 +222,25 @@ public class BlockLockInventory extends BlockProtInventory {
                     TextInput.open(player, BlockProt.getInstance(), title, handleName);
                 }
                 case ENDER_PEARL -> {
+                    if (!canManage) break;
                     final Block transferBlock = block;
                     player.closeInventory();
                     TransferSearchInventory.openSearch(player, transferBlock);
                 }
                 case SPYGLASS -> {
+                    if (!canInspect) break;
                     state.origin = InventoryState.MenuOrigin.BLOCK_LOCK;
                     state.originStack.push(InventoryState.MenuOrigin.BLOCK_LOCK);
                     closeAndOpen(player, new BlockInspectContentsInventory(player).fill());
                 }
                 case CLOCK -> {
+                    if (!canManage && !canReadLogs) break;
                     state.origin = InventoryState.MenuOrigin.BLOCK_LOCK;
                     state.originStack.push(InventoryState.MenuOrigin.BLOCK_LOCK);
                     closeAndOpen(player, new AuditInventory().fill(player));
                 }
                 case EMERALD -> {
-                    // Locate the villager linked to this workstation via particles.
+                    if (!canManage) break;
                     closeAndOpen(player, null);
                     int seconds = BlockProt.getDefaultConfig().getVillagerLocateSeconds();
                     boolean found = VillagerLocateTask.startIfLinked(player, block, seconds);

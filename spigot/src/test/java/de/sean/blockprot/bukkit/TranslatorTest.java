@@ -34,12 +34,34 @@ class TranslatorTest {
     private static ServerMock server;
 
     @BeforeAll
-    static void setup() {
+    static void setup() throws Exception {
         server = MockBukkit.mock();
+        java.io.File tempDir = java.io.File.createTempFile("bp_translator_test", "");
+        tempDir.delete();
+        tempDir.mkdirs();
+        tempDir.deleteOnExit();
+
+        org.bukkit.configuration.file.YamlConfiguration mainYaml = new org.bukkit.configuration.file.YamlConfiguration();
+        mainYaml.set("language", "translations_en.yml");
+        mainYaml.save(new java.io.File(tempDir, "config.yml"));
+
+        de.sean.blockprot.bukkit.config.DefaultConfig config = new de.sean.blockprot.bukkit.config.DefaultConfig(mainYaml, tempDir);
+        var field = BlockProt.class.getDeclaredField("defaultConfig");
+        field.setAccessible(true);
+        field.set(null, config);
+
+        try (var stream = TranslatorTest.class.getResourceAsStream("/lang/translations_en.yml")) {
+            if (stream != null) {
+                var langConfig = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(
+                    new java.io.InputStreamReader(stream, java.nio.charset.StandardCharsets.UTF_8));
+                Translator.loadFromConfigs(langConfig, langConfig);
+            }
+        }
     }
 
     @AfterAll
     static void teardown() {
+        Translator.resetTranslations();
         MockBukkit.unmock();
     }
 
@@ -61,5 +83,18 @@ class TranslatorTest {
     void translatorFallsBackGracefully() {
         String result = Translator.get(TranslationKey.MESSAGES__LOCK_ON_PLACE_SUCCESS);
         assertNotNull(result);
+    }
+
+    @Test
+    void koreanTranslationHasAllKeys() throws Exception {
+        try (var stream = TranslatorTest.class.getResourceAsStream("/lang/translations_ko.yml")) {
+            assertNotNull(stream, "translations_ko.yml should exist");
+            var koConfig = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(
+                new java.io.InputStreamReader(stream, java.nio.charset.StandardCharsets.UTF_8));
+            for (TranslationKey key : TranslationKey.values()) {
+                assertTrue(koConfig.contains(key.toString(), true),
+                    "translations_ko.yml is missing key: " + key);
+            }
+        }
     }
 }

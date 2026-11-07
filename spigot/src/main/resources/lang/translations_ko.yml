@@ -1,884 +1,1073 @@
 locale: ko
 language_name: 한국어
-enabled: 활성화
-disabled: 비활성화
-about:
-  title: §x§a§3§c§6§e§bBlockProt {version} - Spigot Plugin
-  fork_maintainers: '§7포크 관리자: §fVickey & Reim §8(별칭 ZarZey)'
-  report_fork: §x§6§6§c§6§6§6문제 보고 (BlockProt Reloaded)
-  report_fork_hover:
-inventories:
-  back: 뒤로
-  last_page: 마지막 페이지
-  next_page: 다음 페이지
-  block_lock: 잠금 설정
-  user_settings: 환경 설정
-  lock: 잠금
-  unlock: 잠금 해제
-  lock_on_place: 자동으로 잠급니다.
-  copy_configuration: 구성 복사
-  paste_configuration: 복사한 구성 붙여넣기
-  set_block_name: 블록 이름 설정
-  inspect_contents: 내용물 검사
-  redstone:
-    settings: 레드스톤 설정
-    redstone_protection: 레드스톤 보호
-    piston_protection: 피스톤 보호
-    hopper_protection: 깔때기 보호
-    enable_all: 모두 활성화
-    disable_all: 모두 비활성화
-  friends:
-    manage: 친구 관리
-    edit: 친구 편집
-    remove: 친구 삭제
-    search: 친구 검색
-    search_history: 친구 검색 기록
-    result: 친구 검색 결과
-    the_public: 공개
-    the_public_desc: 이 서버의 모든 플레이어를 나타냅니다.
-    make_public: 공개로 전환합니다.
-    permissions: 권한
-    permission:
-      read: 읽기
-      write: 쓰기
-      manager: 관리자
-      none:
-  statistics:
-    statistics: 통계
-    player_statistics: 플레이어 통계
-    global_statistics: 서버 통계
-    container_count: 개수
-    your_blocks: 당신의 블록
-  audit:
-    title: 접근 로그
-    no_entries: 항목이 없습니다.
-    teleport: 블록으로 이동
-    open: 접근 로그
-    action_count:
-    click_hint:
-    player_history:
-    action_access_denied:
-    action_opened:
-    action_item_taken:
-    action_item_placed:
-    action_raid_explosion:
-    action_unknown:
-  loading:
-  searching:
-  user_settings_notifications:
-  block_info:
-    title:
-    owner_label:
-    owner_lore:
-    friend_count:
-    linked_frame:
-    empty_frame:
-    location_format:
-    lore_prefix:
-  inspect_contents_empty:
-  block_settings:
-    title:
-    owner_only_movement:
-  groups:
-    title:
-    button:
-    button_lore:
-    create:
-    create_lore:
-    dissolve:
-    dissolve_lore:
-    leave:
-    leave_lore:
-    member_count:
-    no_group:
-    join:
-    join_lore:
-  stats:
-    lore_tp:
-    lore_no_tp:
-    click_to_open:
-    contents_item_format:
-    contents_more_format:
-    breakdown_entry:
-    breakdown_more:
-    item_frame_entry:
-  entity_settings:
-    settings:
-    protect:
-    no_damage:
-    no_interact:
-    no_leash:
-    no_pickup:
-  locate_villager:
-  lockable_selection:
-    blocks_suffix:
-  entity:
-    inspect_entity:
-    transfer_not_available:
-    manager_suffix:
-  transfer:
-    title:
-    search_prompt:
-    button:
-    button_lore:
-  timed:
-    title:
-    button:
-    button_lore:
-    info:
-    over_max:
-    max_label:
-    no_limit:
-    player_label:
-  user_menu:
-    title:
-    settings:
-    settings_lore:
-    friends:
-    friends_lore:
-    stats:
-    stats_lore:
-    transfer:
-    transfer_lore:
-    timed:
-    timed_lore:
-    hints:
-    hints_lore:
-    hints_already:
-    about:
-    about_lore:
-    close:
-    close_lore:
-    placements:
-    placements_lore:
-  admin_menu:
-    title:
-    reload:
-    reload_lore:
-    update:
-    update_lore:
-    integrations:
-    integrations_lore:
-    stats:
-    stats_lore:
-    debug:
-    debug_lore:
-    info:
-    info_lore:
-    close:
-    close_lore:
-    world_expiry:
-    world_expiry_lore:
-    lockables:
-    lockables_lore:
-    config:
-    config_lore:
-    about:
-    about_lore:
-    auto_drop:
-    auto_drop_lore:
-  admin_block_list:
-    title:
-  player_list:
-    title:
-    empty:
-    block_count:
-    online:
-    offline:
-    sort_name_asc:
-    sort_name_desc:
-    sort_blocks_desc:
-    sort_blocks_asc:
-  bp_unlock:
-    title:
-    left_click_hint:
-    right_click_hint:
-  world_prot_del:
-    title:
-    search_prompt:
-    select_hint:
-    confirm_title:
-    confirm_button:
-    confirm_lore:
-    cancel_button:
-    undo_button:
-    undo_lore:
-    environment:
-    no_undo_available:
-  world_expiry:
-    title:
-    world_lore:
-    disabled:
-    duration_label:
-    environment_label:
-  lockables:
-    title:
-    info_title:
-    left_click_hint:
-    right_click_hint:
-    toggle_family:
-    toggle_family_hint:
-    status_active:
-    status_inactive:
-    off_suffix:
-    copy_message:
-    copy_hover:
-    info_server:
-    info_client:
-    info_active:
-    info_inactive:
-    info_page:
-    category:
-      chests:
-      shulkers:
-      furnaces:
-      storage:
-      signs:
-      doors:
-      trapdoors:
-      beds:
-      gates:
-      workstations:
-      interactive:
-      entities:
-      misc:
-  auto_drop:
-    title:
-    family_title:
-    left_click_hint:
-    right_click_hint:
-    status_active:
-    status_inactive:
-  integrations:
-    separator:
-    none:
-messages:
-  permission_granted: 권한이 생성되었습니다.
-  unlocked: 잠금이 해제되었습니다.
-  no_permission: 권한이 없습니다.
-  friend_added: 친구가 추가되었습니다.
-  friend_removed: 친구가 삭제되었습니다.
-  friend_already_added: 친구가 이미 추가되어있습니다.
-  friend_cant_be_removed: 친구를 제거할 수 없습니다.
-  redstone_added: 레드스톤 보호가 추가되었습니다.
-  redstone_removed: 레드스톤 보호가 삭제되었습니다.
-  exceeded_max_block_count: 잠글 수 있는 최대 블록 수를 초과했습니다.
-  lock_hint: '§6상자, 용광로 등을 웅크리고 오른쪽 클릭하여 블록을 보호할 수 있습니다! 또한 /blockprot 설정을 확인하여 원하는
-    대로 구성하십시오. (이 힌트를 비활성화하려면 여기를 클릭하십시오.)
+enabled: "<green>활성화됨"
+disabled: "<gray>비활성화됨"
 
-    '
-  hint_hover_text: 힌트를 비활성화하려면 BlockProt에서 메뉴를 열거나 여기를 클릭하십시오.
-  disabled_hints: §6힌트 비활성화!
-  chat_input_prompt: '§e플레이어 이름을 입력하세요 §7(§bTab§7 제안, §aEnter§7 확인, §c{cancel}§7 취소):'
-  chat_input_cancel_word: 취소
-  chat_input_cancelled: §c검색이 취소되었습니다.
-  lock_on_place_success: §a블록이 잠겼습니다!
-  friends_searching: §e§f{player}§e 검색 중...
-  friends_addall_success: §a§f{player}§a을(를) §f{count}§a 블록에 친구로 추가했습니다.
-  friends_addall_usage: '§c사용법: /blockprot friends addall <플레이어>'
-  inactivity_cleanup_done: '§e[BlockProt] 비활성 정리: §f{count}§e 블록이 해제되었습니다.'
-  friends_list_title: §6당신의 친구들
-  error_prefix:
-  entity_death_notification:
-  friend_player_not_found:
-  entity_denied:
-  only_players:
-  reload_done:
-  integrations_enabled:
-  transfer_success:
-  transfer_usage:
-  transfer_not_owner:
-  transfer_player_not_found:
-  transfer_self:
-  transfer_self_gui:
-  transfer_not_owner_gui:
-  transfer_failed:
-  transfer_all_success:
-  transfer_all_no_blocks:
-  timed_access_success:
-  timed_access_granted:
-  timed_access_usage:
-  timed_access_revoked:
-  timed_access_not_owner:
-  timed_access_over_max:
-  timed_access_invalid_state:
-  admin_info_header:
-  admin_info_entry:
-  admin_info_usage:
-  admin_info_player_not_found:
-  admin_info_no_blocks:
-  user_transfer_hint:
-  user_timed_hint:
-  hints_disabled:
-  hints_already:
-  copy_done:
-  paste_done:
-  notify_opened:
-  notify_item_taken:
-  notify_item_placed:
-  raid_alert:
-  raid_coords:
-  raid_tp_label:
-  raid_pending:
-  no_permission_tp:
-  remote_unlock_warning:
-  admin_reload_done:
-  admin_integrations:
-  admin_info_hint:
-  admin_debug_hint:
-  admin_unlock_success:
-  admin_unlock_failed:
-  admin_unlock_usage:
-  bp_unlock_removed:
-  bp_unlock_usage:
-  bp_unlock_player_not_found:
-  bp_unlock_no_blocks:
-  world_expiry:
-    set:
-    cleared:
-    error:
-    usage:
-  lockables:
-    family_unknown:
-    toggle_feedback:
-    toggle_family_feedback:
-  auto_drop:
-    toggle_feedback:
-    toggle_family_feedback:
-  groups:
-    created:
-    dissolved:
-    joined:
-    left:
-    not_owner:
-    already_in_group:
-    disabled:
-  debug_usage:
-  console_warn_prefix:
-  cmd_usage_menus:
-  cmd_usage_cli:
-  cmd_usage_cli_gui_only:
-  world_prot_del_done:
-  world_prot_del_none:
-  world_prot_del_world_not_found:
-  world_prot_del_usage:
-  world_prot_del_undo_done:
-  world_prot_del_undo_nothing:
-  debug:
-    chest_placed:
-    shulker_placed:
-    history_cleared:
-    running_diagnostics:
-    results_go_to_log:
-    checks_passed_actionbar:
-    checks_failed_actionbar:
-    checks_passed_chat:
-    checks_failed_chat:
-    log_path:
-    inventory_title:
-  time:
-    days:
-    day:
-    hours:
-    hour:
-    minutes:
-    minute:
-  first_run:
-    header:
-    title:
-    step1:
-    step1_click:
-    step2:
-    step3:
-    step4:
-    footer:
-  integrations:
-    name_colored:
-    name:
-    separator:
-    none:
-  location:
-    locked_ago:
-    just_now:
-    empty_contents:
-  update:
-    outdated:
-    ahead:
-    up_to_date:
-    click_hint:
-worlds:
-  scan_start: '[BlockProt] 세계 검색 중... ({count} 로드됨)'
-  scan_world_added: '[BlockProt] 세계 ''{world}''가 worlds.yml에 추가되었습니다: 보호가 기본적으로 비활성화되어
-    있습니다. 수동으로 활성화하세요.'
-  scan_complete: '[BlockProt] 검색 완료. {added}개의 새로운 세계가 등록되었습니다.'
-  status:
-  protected_count:
-  no_worlds:
-  world_config_hint:
-  per_world_config:
-  worlds:
-  configured:
-integrations:
-  lands:
-    protect_containers_flag_name: 보관함 보호 (BlockProt)
-    protect_containers_desc: 플레이어가 상자, 용광로 등을 보호할 수 있습니다.
-    require_protect_for_friends_flag_name: 친구를 위해 "보관함 보호"가 필요합니다. (BlockProt)
-    require_protect_for_friends_desc: '"보관함 보호" 권한이 있는 플레이어만 친구로 추가할 수 있습니다.'
-help:
-  header: §6=== BlockProt 도움말 ===
-  footer: §6==================
-  block_protection_title:
-  block_protection_settings:
-  friends_title:
-  friends_gui:
-  friends_addall:
-  transfer:
-  timed_access:
-  admin_info:
-  other_title:
-  settings:
-  stats:
-  about:
-  integrations:
-  update:
-  reload:
-  disable_hints:
-  debug:
-  unlock:
-  lockables:
-  recommended:
-  world_prot_del:
-  gui_mode_title:
-  gui_user:
-  gui_admin:
 icon:
-  settings:
+  settings: "⚙ "
+  friends: "👤 "
+  stats: "📊 "
+  about: "ℹ "
+  lockables: "📦 "
+  reload: "🔄 "
+  search: "🔍 "
+  integrations: "🔗 "
+  config: "📝 "
+  debug: "🔧 "
+  info: "👤 "
+  world_expiry: "⏱ "
+  unlock: "🔓 "
+  history: "📖 "
+  enable_all: "✔ "
+  disable_all: "✖ "
+  undo: "↩ "
+  add: "➕ "
+  toggle_on: "● "
+  toggle_off: "○ "
+  "true": "● 활성화"
+  "false": "○ 비활성화"
+  toggle_on_active: "● "
+  toggle_off_inactive: "○ "
+  tiers: "🛡 "
+
+search_aliases:
+  chest: "chest, chests, 상자"
+  copper: "copper, 구리"
+  furnace: "furnace, furnaces, 화로"
+  door: "door, doors, 문"
+  trapdoor: "trapdoor, trapdoors, 다락문"
+  fence: "fence, fences, 울타리"
+  bed: "bed, beds, 침대"
+  hopper: "hopper, hoppers, 깔때기"
+  barrel: "barrel, barrels, 통"
+  lectern: "lectern, lecterns, 독서대"
+  sign: "sign, signs, 표지판"
+  bell: "bell, bells, 종"
+  cauldron: "cauldron, cauldrons, 가마솥"
+  smoker: "smoker, smokers, 훈연기"
+  stonecutter: "stonecutter, stonecutters, 석재 절단기, 석재절단기"
+  anvil: "anvil, anvils, 모루"
+  frame: "frame, frames, 액자, 아이템 액자"
+  boat: "boat, boats, 보트"
+  minecart: "minecart, minecarts, 마인카트, 카트"
+  stand: "stand, stands, 거치대, 갑옷 거치대"
+  brewing: "brewing, 양조기"
+  bookshelf: "bookshelf, bookshelves, 책장"
+
+about:
+  title: "<#a3c6eb>BlockProt {version} - Spigot 플러그인"
+  fork_maintainers: "<gray>유지 관리자: </gray><white>Vickey </white><dark_gray>(VictorGugug)"
+  report_fork: "<#66c666>문제 신고 / 제안하기"
+  report_fork_hover: "클릭하여 GitHub 이슈 트래커를 엽니다"
+
+commands:
+  description: "BlockProt 명령어에 접근합니다."
+
+inventories:
+  back: "뒤로"
+  last_page: "이전 페이지"
+  next_page: "다음 페이지"
+  loading: "불러오는 중..."
+  searching: "검색 중..."
+  block_lock: "블록 잠금"
+  user_settings: "사용자 설정"
+  user_settings_notifications: "접근 알림"
+  user_settings_colorblind: "색약 모드"
+  block_info:
+    title: "블록 정보"
+    owner_label: "<gold>소유자"
+    name_label: "<gold>이름"
+    owner_lore: "<gray>이 블록의 소유자는 </gray><white>{player}</white><gray>입니다."
+    friend_count: "<gray>친구: </gray><white>{count}명"
+    linked_frame: "<gray>연결된 아이템 액자: {item}"
+    empty_frame: "<gray>(비어 있음)"
+    location_format: "{type} \"<white>{nbtName}</white><gray>\" {coords}"
+    lore_prefix: "<gray>"
+  lock: "잠금"
+  unlock: "잠금 해제"
+  lock_on_place: "배치 시 자동 잠금"
+  copy_configuration: "설정 복사"
+  paste_configuration: "설정 붙여넣기"
+  set_block_name: "블록 이름 설정"
+  inspect_contents: "내용물 검사"
+  inspect_contents_empty: "<dark_gray>비어 있음"
+  redstone:
+    settings: "블록 설정"
+    redstone_protection: "레드스톤 보호"
+    piston_protection: "피스톤 보호"
+    hopper_protection: "깔때기 보호"
+    enable_all: "모두 활성화"
+    disable_all: "모두 비활성화"
+  block_settings:
+    title: "블록 설정"
+    owner_only_movement: "소유자 전용 이동"
   friends:
+    manage: "친구 관리"
+    edit: "친구 편집"
+    remove: "친구 삭제"
+    search: "플레이어 검색"
+    search_history: "검색 기록"
+    result: "검색된 플레이어"
+    the_public: "공용 (모든 플레이어)"
+    the_public_desc: "이 서버의 모든 플레이어를 나타냅니다."
+    make_public: "공용으로 설정"
+    select_candidate: "후보 선택"
+    permissions: "권한"
+    permission:
+      read: "읽기"
+      write: "쓰기"
+      manager: "관리자"
+      none: "접근 불가"
+  statistics:
+    statistics: "통계"
+    player_statistics: "플레이어 통계"
+    global_statistics: "서버 전체 통계"
+    container_count: "블록 수"
+    your_blocks: "내 블록"
   stats:
-  about:
-  lockables:
-  reload:
-  search:
-  integrations:
-  config:
-  debug:
-  info:
+    lore_tp: "<gray>[✓] 클릭: 블록으로 순간이동"
+    lore_no_tp: "<red>[✗] 권한 없음 (blockprot.blocks.tp)"
+    click_to_open: "<gray>클릭하여 열기"
+    contents_item_format: "<dark_gray>- {item} {count}개"
+    contents_more_format: "<dark_gray>+ 그 외 {count}개..."
+    breakdown_entry: "<gray>{name}</gray><dark_gray>: </dark_gray><white>{count}개"
+    breakdown_more: "<dark_gray>+ 그 외 {count}개..."
+    item_frame_entry: "<dark_gray>{item} {count}개"
+  audit:
+    title: "접근 로그"
+    no_entries: "로그 기록이 없습니다."
+    teleport: "블록으로 순간이동"
+    open: "접근 로그 열기"
+    action_count: "<gray>{count}개의 활동"
+    click_hint: "<gray>클릭하여 전체 기록을 확인합니다."
+    player_history: "<green>플레이어 기록"
+    action_access_denied: "<red>접근 거부됨"
+    action_opened: "<green>열림"
+    action_item_taken: "<yellow>아이템 꺼냄"
+    action_item_placed: "<dark_green>아이템 넣음"
+    action_raid_explosion: "<red>습격 폭발"
+    action_unknown: "<gray>접근"
+  entity_settings:
+    settings: "<light_purple>엔티티 설정"
+    protect: "<light_purple>엔티티 보호"
+    no_damage: "<red>피해 방지"
+    no_interact: "<yellow>상호작용 방지"
+    no_leash: "<gold>끈 묶기 방지"
+    no_pickup: "<aqua>어깨 탑승 방지 (앵무새)"
+  locate_villager: "<green>연결된 주민 위치 찾기"
+  lockable_selection:
+    blocks_suffix: "개 블록"
+  entity:
+    inspect_entity: "내용물 검사"
+    transfer_not_available: "<gray>이 엔티티 유형은 소유권 이전이 불가능합니다."
+    manager_suffix: " [관리자]"
+  transfer:
+    title: "소유권 이전: {player}"
+    search_prompt: "플레이어 이름"
+    button: "블록 이전"
+    button_lore: "소유권을 다른 플레이어에게 이전합니다."
+  timed:
+    title: "기간제 접근"
+    button: "<yellow>기간제 접근 권한"
+    button_lore: "일정 시간 동안 접근 권한을 부여합니다. 클릭하여 기간을 선택하세요."
+    info: "<yellow>정보"
+    over_max: "<red>설정된 최대 기간을 초과했습니다"
+    max_label: "<gray>최대 기간: </gray><white>{duration}"
+    no_limit: "<gray>최대 기간: </gray><white>무제한"
+    player_label: "<gray>플레이어: </gray><white>{player}"
+  user_menu:
+    title: "<dark_gray>[</dark_gray><aqua>유저</aqua><dark_gray>] </dark_gray><white>BlockProt"
+    settings: "<white>내 설정"
+    settings_lore: "개인 설정을 조정합니다."
+    friends: "<green>친구 목록"
+    friends_lore: "글로벌 친구 목록을 관리합니다."
+    stats: "<aqua>통계"
+    stats_lore: "내가 보호 중인 블록 수를 확인합니다."
+    placements: "<aqua>설치된 블록"
+    placements_lore: "보호된 블록과 그 위치를 확인합니다."
+    transfer: "<light_purple>모든 블록 이전"
+    transfer_lore: "보호 중인 모든 블록을 다른 플레이어에게 이전합니다."
+    timed: "<yellow>기간제 접근"
+    timed_lore: "블록에 임시 접근 권한을 부여합니다."
+    hints: "<gray>보호 힌트"
+    hints_lore: "블록 설치 시 안내 힌트를 켜거나 끕니다."
+    hints_already: "<gray>힌트가 이미 설정되어 있습니다."
+    about: "<white>BlockProt 정보"
+    about_lore: "플러그인 정보입니다."
+    close: "<red>닫기"
+    close_lore: "이 메뉴를 닫습니다."
+  admin_menu:
+    title: "BlockProt - 관리자"
+    reload: "<green>설정 다시 불러오기"
+    reload_lore: "config.yml 및 언어 파일을 다시 불러옵니다."
+    update: "<aqua>업데이트 확인"
+    update_lore: "새로운 버전이 있는지 확인합니다."
+    integrations: "<light_purple>활성 플러그인 연동"
+    integrations_lore: "채팅창에 활성화된 연동 플러그인 목록을 표시합니다."
+    stats: "<white>전체 통계"
+    stats_lore: "서버 전체 통계 메뉴를 엽니다."
+    debug: "<red>진단 (디버그)"
+    debug_lore: "플러그인 내부 테스트를 실행하고 로그에 기록합니다."
+    info: "<yellow>플레이어 블록 목록"
+    info_lore: "특정 플레이어의 보호 블록을 조회합니다 (GUI)."
+    unlock: "<red>블록 강제 해제"
+    unlock_lore: "특정 플레이어의 블록 보호를 해제합니다."
+    close: "<red>닫기"
+    close_lore: "이 메뉴를 닫습니다."
+    world_expiry: "<dark_purple>월드별 만료"
+    world_expiry_lore: "월드별 보호 만료 일정을 설정합니다."
+    lockables: "<white>잠금 가능 블록"
+    lockables_lore: "서버에서 잠금 가능한 모든 블록 유형을 조회 및 토글합니다."
+    config: "<yellow>관리자 설정"
+    config_lore: "관리자 구성 대화상자를 엽니다."
+    about: "<white>BlockProt 정보"
+    about_lore: "플러그인 정보 및 버전입니다."
+    tiers: "<gold>관리자 등급 (Tiers)"
+    tiers_lore: "플레이어 관리자 등급 및 역할을 관리합니다."
+    auto_drop: "<aqua>자동 보관 (Auto-Drop)"
+    auto_drop_lore: "블록 파괴 시 인벤토리로 자동 보관될 블록을 설정합니다."
+  admin_tiers:
+    title: "관리자 등급 및 역할"
+    set_offline: "<yellow>이름으로 지정"
+    set_offline_lore: "오프라인 플레이어 또는 UUID에 역할을 부여합니다."
+    current_role: "<gray>역할: </gray><white>{role}"
+    click_to_assign: "<yellow>클릭하여 역할 변경"
+    select_role_title: "역할 선택: {player}"
+    role_owner: "<red>최고 관리자 (Owner)"
+    role_owner_lore: "모든 관리 권한 및 역할 부여 권한을 가집니다."
+    role_t3: "<gold>T3 어드민 (Admin)"
+    role_t3_lore: "파괴적 관리 작업, 전체 구성, 디버그 진단을 수행합니다."
+    role_t2: "<green>T2 헬퍼 (Helper)"
+    role_t2_lore: "잠금 해제, 잠금 가능 블록 설정, 보관함 바이패스를 수행합니다."
+    role_t1: "<aqua>T1 모더레이터 (Moderator)"
+    role_t1_lore: "읽기 전용 작업, 블록 정보, 로그 확인, 순간이동을 수행합니다."
+    role_none: "<gray>일반 유저 (Normal)"
+    role_none_lore: "관리 등급이 없는 기본 플레이어 권한입니다."
+    role_custom: "<light_purple>커스텀 (Custom)"
+    role_custom_lore: "플레이어별로 세부 관리 권한을 맞춤 설정합니다."
+    status_op: "<red>● 서버 관리자 (OP)"
+    status_not_op: "<gray>○ 일반 플레이어"
+    select_role_below: "<yellow>아래에서 역할을 선택하세요"
+    custom_left_click: "<gray>[✓] 좌클릭: 역할 부여"
+    custom_right_click: "<light_purple>[*] 우클릭: 세부 권한 설정"
+  admin_custom_flags:
+    title: "세부 권한 설정: {player}"
+    enabled: "<green>● 활성화됨"
+    disabled: "<red>○ 비활성화됨"
+    active_count: "<light_purple>커스텀: </light_purple><white>{active}/{total}개 활성화"
+    min_tier: "<dark_gray>최소 등급: </dark_gray><gray>{tier}"
+    click_to_toggle: "<yellow>클릭하여 전환"
+  admin_block_list:
+    title: "{player}님의 블록"
+  player_list:
+    title: "전체 플레이어"
+    empty: "<gray>플레이어를 찾을 수 없습니다."
+    block_count: "<gray>보호 중인 블록: </gray><white>{count}개"
+    online: "<green>온라인"
+    offline: "<gray>오프라인"
+    sort_name_asc: "<white>정렬: 이름 오름차순"
+    sort_name_desc: "<white>정렬: 이름 내림차순"
+    sort_blocks_desc: "<white>정렬: 블록 많은 순"
+    sort_blocks_asc: "<white>정렬: 블록 적은 순"
+  bp_unlock:
+    title: "잠금 해제: {player}"
+    left_click_hint: "<gray>[✓] 좌클릭: 내용물 보기 (읽기 전용)"
+    right_click_hint: "<red>[!] 우클릭: 보호 해제"
+  world_prot_del:
+    title: "월드 보호 데이터 삭제"
+    search_prompt: "<gray>필터링할 월드 이름을 입력하세요..."
+    select_hint: "<yellow>클릭하여 이 월드를 선택합니다"
+    confirm_title: "보호 데이터 삭제: {world}"
+    confirm_button: "<red>삭제 확인: {world}"
+    confirm_lore: "<gray>월드 </gray><yellow>{world}</yellow><gray>의 모든 보호를 영구 삭제합니다."
+    cancel_button: "<white>취소"
+    undo_button: "<green>마지막 삭제 작업 되돌리기"
+    undo_lore: "<gray>가장 최근 작업에서 삭제된 보호를 복구합니다."
+    environment: "<gray>환경: "
+    no_undo_available: "<gray>되돌릴 수 있는 기록이 없습니다"
   world_expiry:
-  unlock:
-  history:
-  enable_all:
-  disable_all:
-  undo:
-  add:
-  toggle_on:
-  toggle_off:
-  toggle_on_active:
-  toggle_off_inactive:
-  true:
-  false:
-console:
-  config_change_detected:
-  config_reloaded:
-  filewatcher_error:
-  audit_logger_started:
-  audit_logger_failed:
-  worldedit_listener_enabled:
-  claims_system_enabled:
-  claims_system_disabled:
-  worlds_yml_syntax_error:
-  worlds_yml_restored:
-  worlds_yml_restore_failed:
-  worlds_yml_save_failed:
-  backup_dir_failed:
-  backup_created:
-  backup_review_config:
-  backup_failed:
-  config_language_missing:
-  lang_keys_updated:
-  lang_keys_save_failed:
-  config_keys_updated:
-  config_keys_save_failed:
-  mysql_enabled:
-  mysql_disabled:
-  mysql_lookup_failed:
-  mysql_schema_failed:
-  mysql_cache_load_failed:
-  mysql_operation_failed:
-  translations_incomplete:
-  java_too_old:
-  not_paper:
-  typed_views_fallback:
-  dialogs_unavailable:
-  stats_save_failed:
-  migration_start:
-  migration_done:
-  migration_failed:
-  saving_statistics:
+    title: "월드 만료 설정"
+    world_lore: "<gray>클릭하여 만료 기간을 설정합니다"
+    disabled: "<gray>비활성화됨"
+    duration_label: "기간: "
+    environment_label: "환경: "
+  lockables:
+    title: "잠금 가능 블록"
+    info_title: "잠금 가능 블록 정보"
+    left_click_hint: "좌클릭: 활성화 / 비활성화"
+    right_click_hint: "우클릭: 이름 복사"
+    toggle_family: "계열 전체 토글: "
+    toggle_family_hint: "좌클릭: 해당 카테고리 전체 활성화 / 비활성화"
+    status_active: "상태: 활성화됨"
+    status_inactive: "상태: 비활성화됨"
+    off_suffix: " [꺼짐]"
+    copy_message: "[복사] "
+    copy_hover: "클릭하여 클립보드에 복사"
+    info_server: "서버: "
+    info_client: "클라이언트: "
+    info_active: "활성: "
+    info_inactive: "비활성: "
+    info_page: "페이지: "
+    category:
+      chests: "상자"
+      shulkers: "셜커 상자"
+      furnaces: "화로"
+      storage: "보관함"
+      signs: "표지판"
+      doors: "문"
+      trapdoors: "다락문"
+      beds: "침대"
+      gates: "울타리 문"
+      workstations: "직업 블록"
+      interactive: "상호작용 블록"
+      entities: "엔티티"
+      misc: "기타"
+  auto_drop:
+    title: "인벤토리 자동 보관 (Auto-Drop)"
+    family_title: "자동 보관: {family}"
+    search: "블록 검색"
+    search_lore: "이름으로 블록을 검색합니다."
+    search_title: "검색: {query}"
+    left_click_hint: "좌클릭: 개별 블록 선택"
+    right_click_hint: "우클릭: 계열 전체 토글"
+    status_active: "상태: 활성화됨"
+    status_inactive: "상태: 비활성화됨"
+
+messages:
+  permission_granted: "권한이 부여되었습니다."
+  unlocked: "잠금이 해제되었습니다."
+  no_permission: "권한이 없습니다."
+  error_prefix: "<red>[BlockProt]: "
+  entity_death_notification: "<bold><red>[BlockProt] </red></bold><red>내 반려동물 </red><yellow>{pet_name}</yellow><red>(이)가 사망했습니다."
+  friend_added: "친구를 추가했습니다."
+  friend_removed: "친구를 삭제했습니다."
+  friend_already_added: "이미 추가된 친구입니다."
+  friend_cant_be_removed: "해당 친구는 삭제할 수 없습니다."
+  friend_player_not_found: "<red>플레이어를 찾을 수 없습니다."
+  friend_search_failed: "<red>플레이어 검색에 실패했습니다. 잠시 후 다시 시도해주세요."
+  redstone_added: "레드스톤 보호가 설정되었습니다."
+  redstone_removed: "레드스톤 보호가 해제되었습니다."
+  exceeded_max_block_count: "잠글 수 있는 최대 블록 수를 초과했습니다."
+  lock_hint: >
+    <gold>웅크린 상태로 상자나 화로 등을 우클릭하면 블록을 잠글 수 있습니다!
+    또한 /blockprot settings 명령어로 원하는 설정을 조정해보세요.
+    (여기를 클릭하면 이 힌트가 비활성화됩니다.)
+  hint_hover_text: "BlockProt 메뉴를 열거나 여기를 클릭하여 힌트를 끕니다."
+  disabled_hints: "<gold>보호 힌트 메시지를 껐습니다!"
+  chat_input_prompt: "<yellow>플레이어 이름을 입력하세요 </yellow><gray>(</gray><green>Enter</green><gray> 확인, </gray><red>{cancel}</red><gray> 취소):"
+  chat_input_suffix: "<gray>(</gray><green>Enter</green><gray> 확인, </gray><red>{cancel}</red><gray> 취소):"
+  chat_input_cancel_word: "취소"
+  chat_input_cancelled: "<red>검색이 취소되었습니다."
+  item_count_suffix: " x{amount}"
+  entity_denied: "<red>[BlockProt] </red>이 반려동물과 상호작용할 권한이 없습니다."
+  lock_on_place_success: "<green>블록이 보호되었습니다!"
+  friends_searching: "<yellow>{player}님을 검색 중...</yellow>"
+  friends_addall_success: "<green>{player}님을 내 블록 <white>{count}</white>개에 친구로 등록했습니다."
+  friends_addall_usage: "<red>사용법: /blockprot friends addall <플레이어>"
+  inactivity_cleanup_done: "<yellow>미접속자 정리: </yellow><white>{count}</white><yellow>개 블록 보호가 정리되었습니다."
+  friends_list_title: "<gold>친구 목록"
+  only_players: "플레이어만 이 명령어를 사용할 수 있습니다."
+  reload_done: "<green>BlockProt 설정을 다시 불러왔습니다."
+  integrations_enabled: "<gray>활성화된 연동 플러그인 ({count}개): {integrations}"
+  transfer_success: "<green>소유권이 </green><white>{player}</white><green>님에게 이전되었습니다. 기존 소유자는 친구로 추가되었습니다."
+  transfer_usage: "<red>사용법: /bp transferall <플레이어>"
+  transfer_not_owner: "<red>해당 블록의 소유자가 아닙니다."
+  transfer_player_not_found: "<red>플레이어를 찾을 수 없습니다: {player}"
+  transfer_self: "<red>자신에게 블록을 이전할 수 없습니다."
+  transfer_self_gui: "<red>자신에게 블록을 이전할 수 없습니다."
+  transfer_not_owner_gui: "<red>해당 블록의 소유자가 아닙니다."
+  transfer_failed: "<red>블록 소유권 이전에 실패했습니다."
+  transfer_all_success: "<green>보호된 블록 </green><white>{count}</white><green>개를 </green><white>{player}</white><green>님에게 이전했습니다."
+  transfer_all_no_blocks: "<red>이전할 보호 블록이 없습니다."
+  timed_access_success: "<white>{player}</white><green>님에게 </green><white>{seconds}</white><green>초 동안 임시 접근 권한을 부여했습니다."
+  timed_access_granted: "<white>{duration}</white><green> 동안 임시 접근 권한이 부여되었습니다."
+  timed_access_usage: "<red>사용법: /bp timed <플레이어> <초>  (내가 소유한 블록을 바라본 상태여야 합니다)"
+  timed_access_revoked: "<white>{player}</white><gold>님의 기간제 접근 권한이 취소되었습니다."
+  timed_access_not_owner: "<red>해당 블록의 소유자가 아니거나 잠금 가능한 블록이 아닙니다."
+  timed_access_over_max: "<red>설정된 최대 기간({duration})을 초과했습니다."
+  timed_access_invalid_state: "<red>기간제 접근 권한은 특정 블록에 등록된 친구에게만 부여할 수 있습니다."
+  admin_info_header: "<gold>=== {player}님의 보호 블록 목록 ==="
+  admin_info_entry: "<gray>  {world} </gray><white>{x}, {y}, {z}"
+  admin_info_usage: "<red>사용법: /bp info <플레이어>"
+  admin_info_player_not_found: "<red>플레이어를 찾을 수 없습니다: {player}"
+  admin_info_no_blocks: "<gray>{player}님이 소유한 잠긴 블록이 없습니다."
+  admin_setrole_usage: "<red>사용법: /bp tiers setrole <플레이어> <t1|t2|t3|owner|none>"
+  admin_setrole_success: "<white>{player}</white><green>님의 관리자 역할을 </green><white>{role}</white><green>(으)로 변경했습니다."
+  admin_tiers_disabled: "<red>config.yml에서 관리자 등급 기능이 비활성화되어 있습니다."
+  custom_perm_no_withdraw: "<red>이 블록에서 아이템을 꺼낼 권한이 없습니다.</red>"
+  custom_perm_no_deposit: "<red>이 블록에 아이템을 넣을 권한이 없습니다.</red>"
+  logs_usage: "<gold>사용법: <yellow>/bp logs [here|player <이름>|<페이지>]</yellow>"
+  logs_header: "<gold>=== <yellow>BlockProt 접근 로그 ({page}/{total} 페이지)</yellow> <gold>==="
+  logs_no_entries: "<gray>감사 로그 기록이 없습니다.</gray>"
+  logs_no_target: "<red>유효한 블록을 바라보거나 인수를 입력해야 합니다.</red>"
+  logs_target_not_protected: "<red>바라보고 있는 블록은 보호되지 않았습니다.</red>"
+  logs_page_info: "<gray>{total}페이지 중 {page}페이지 (총 {count}개 기록)</gray>"
+  logs_prev: "<yellow>[« 이전]</yellow>"
+  logs_next: "<yellow>[다음 »]</yellow>"
+  hints_disabled: "<green>보호 안내 힌트가 비활성화되었습니다."
+  hints_already: "<gray>힌트 설정이 이미 완료되었습니다. 내 설정에서 변경할 수 있습니다."
+  copy_done: "<green>블록 설정이 복사되었습니다."
+  paste_done: "<green>블록 설정이 붙여넣어졌습니다."
+  notify_opened: "<gray>{player}</gray><white>님이 내 </white><yellow>{block}</yellow><white>(을)를 열었습니다."
+  notify_item_taken: "<gray>{player}</gray><white>님이 내 </white><yellow>{block}</yellow><white>에서 </white><yellow>{item} {amount}개</yellow><white>(을)를 꺼냈습니다."
+  notify_item_placed: "<gray>{player}</gray><white>님이 내 </white><yellow>{block}</yellow><white>에 </white><yellow>{item} {amount}개</yellow><white>(을)를 넣었습니다."
+  raid_alert: "<red>! 습격 감지! </red><yellow>{block} </yellow><red>위치: </red><yellow>{world} [{x}, {y}, {z}]</yellow><red> - 원인: </red><yellow>{actor}"
+  raid_coords: "<bold><red>[BlockProt] </red></bold><red>내 </red><yellow>{block}</yellow><red>에 습격이 발생했습니다! 위치: </red><white>{world} [{x}, {y}, {z}]</white><red>. 원인: </red><yellow>{actor}"
+  raid_tp_label: "<green>[순간이동]"
+  raid_pending: "<bold><red>[BlockProt] </red></bold><red>오프라인 상태일 때 내 블록 </red><yellow>{block}</yellow><red>에 습격이 감지되었습니다! 위치: </red><white>{world} [{x}, {y}, {z}]</white><red>. 원인: </red><yellow>{actor}"
+  raid_actor_environment: "환경"
+  no_permission_tp: "<red>[✗] 권한 없음: blockprot.blocks.tp"
+  remote_unlock_warning: "<yellow>! 원격으로 블록 잠금을 해제합니다. 확인하려면 한 번 더 클릭하세요. 다시 잠그려면 블록에 직접 방문해야 합니다."
+  admin_reload_done: "<green>설정 및 번역 파일을 다시 불러왔습니다."
+  admin_reload_failed: "<red>다시 불러오기 실패: {error}"
+  admin_tiers_info: "<gray>[BlockProt] </gray><yellow>{player} </yellow><gray>- {role} </gray><gray>| </gray><red>OP: {op}"
+  admin_tiers_op_yes: "<red>예"
+  admin_tiers_op_no: "<gray>아니오"
+  menu_internal_error: "<red>메뉴 작업을 처리하는 중 내부 오류가 발생했습니다. 서버 콘솔을 확인하세요."
+  admin_integrations: "<gray>연동 플러그인 ({count}개): {integrations}"
+  admin_info_hint: "<gray>/bp info <플레이어> 명령어로 보호 블록을 조회할 수 있습니다."
+  admin_debug_hint: "<gray>진단 도구를 실행하는 중..."
+  admin_unlock_success: "<green>{world}의 {x}, {y}, {z} 좌표 블록 잠금을 해제했습니다."
+  admin_unlock_failed: "<red>블록 잠금 해제에 실패했습니다. 보호되지 않았거나 잠금 불가능한 블록입니다."
+  admin_unlock_usage: "<red>사용법: /bp unlock <플레이어>  (blockprot.admin 권한 필요)"
+  bp_unlock_removed: "<white>{player}</white><green>님의 </green><white>{block}</white><green> (좌표: {x}, {y}, {z}) 보호를 해제했습니다."
+  bp_unlock_usage: "<red>사용법: /bp unlock <플레이어>"
+  bp_unlock_player_not_found: "<red>플레이어를 찾을 수 없습니다: {player}"
+  bp_unlock_no_blocks: "<gray>{player}님이 소유한 잠긴 블록이 없습니다."
+  bp_unlock_console_header: "<yellow>{player}님이 소유한 잠긴 블록 </yellow><white>{count}</white><yellow>개:"
+  bp_unlock_console_entry: "<gray>- </gray><white>{world} {x} {y} {z}"
+  world_expiry:
+    set: "<white>{world}</white><green> 월드의 만료 기간을 </green><white>{duration}</white><green>(으)로 설정했습니다."
+    cleared: "<white>{world}</white><red> 월드의 만료 기간을 초기화했습니다."
+    error: "<red>잘못된 기간 형식입니다: {input}. 30d, 12h, 45m 형식으로 입력하세요."
+    usage: "<yellow>기간을 입력하세요 (예: 30d, 12h, 45m). 비활성화하려면 0을 입력하세요."
+  lockables:
+    family_unknown: "{expression}에 해당하는 계열을 확인할 수 없습니다."
+    toggle_feedback: "blocks.yml에서 {name} {action}"
+    toggle_family_feedback: "blocks.yml에서 {family} 계열 {action}"
+  auto_drop:
+    toggle_feedback: "auto_drop_to_inventory에서 {name} {action}"
+    toggle_family_feedback: "auto_drop_to_inventory에서 {family} 계열 {action}"
+    search_no_results: "'{query}' 검색 결과가 없습니다."
+  debug_usage: "<red>사용법: /bp debug <run|...>"
+  console_warn_prefix: "<red>[BlockProt 경고] "
+  cmd_usage_menus: "<red>사용법: /bp <user|admin>"
+  cmd_usage_cli: "<red>사용법: 사용 가능한 명령어 확인은 /bp help"
+  cmd_usage_cli_gui_only: "<red>메뉴 모드에서는 /bp user 또는 /bp admin 명령어를 사용하세요 (config에서 use_menus 토글 가능)"
+  world_prot_del_done: "<yellow>{world}</yellow><green> 월드에서 </green><white>{count}</white><green>개의 블록 보호를 삭제했습니다."
+  world_prot_del_none: "<white>{world}</white><yellow> 월드에 보호된 블록이 없습니다."
+  world_prot_del_world_not_found: "<red>월드를 찾을 수 없습니다: {world}"
+  world_prot_del_usage: "<red>사용법: /bp protdel [월드]"
+  world_prot_del_console_usage: "<red>콘솔 사용법: /bp protdel <월드> confirm | /bp protdel undo"
+  world_prot_del_undo_done: "<green>되돌리기 완료: </green><white>{count}</white><green>개의 블록 보호를 복구했습니다."
+  world_prot_del_undo_nothing: "<yellow>되돌릴 삭제 작업이 없습니다."
+  debug:
+    chest_placed: "<green>상자 설치됨"
+    shulker_placed: "<green>셜커 상자 설치됨"
+    history_cleared: "<green>기록 초기화됨"
+    running_diagnostics: "<yellow>시스템 진단 실행 중..."
+    results_go_to_log: "<gray>진단 결과는 세션 로그에 기록됩니다. 요약은 마지막에 표시됩니다."
+    checks_passed_actionbar: "<green>✔ 전체 {passed}개 검사 통과"
+    checks_failed_actionbar: "<red>✗ {total}개 중 {failed}개 실패"
+    checks_passed_chat: "<bold><green>[BlockProt] </green></bold><green>전체 <bold>{passed}</bold>개 검사를 통과했습니다."
+    checks_failed_chat: "<bold><red>[BlockProt] </red></bold><red>{failed}개 검사 실패 - 로그를 확인하세요."
+    log_path: "<gray>로그 경로: </gray><white>{path}"
+    headless_start: "<yellow>[BlockProt] 월드 스폰 위치에서 콘솔 진단을 실행합니다 (접속 플레이어 없음)..."
+    headless_player_context: "<yellow>[BlockProt] 플레이어 컨텍스트를 사용하여 전체 진단을 실행합니다: </yellow><white>{player}"
+    headless_finished: "<green>[BlockProt] 콘솔 진단 완료: </green><white>{passed}개 통과, {failed}개 실패 (총 {total}개)."
+    inventory_title: "<red>BlockProt 디버그"
+  time:
+    days: "일"
+    day: "일"
+    hours: "시간"
+    hour: "시간"
+    minutes: "분"
+    minute: "분"
+  first_run:
+    header: "<strikethrough><#d2b48c>{line}"
+    title: "<#d2b48c>   BlockProt Reloaded - 첫 시작 가이드"
+    step1: "<gray>   1. </gray><#8fe3b0>{command} </#8fe3b0><gray>명령어로 잠금 가능한 블록을 설정하세요."
+    step1_click: "<gray>      여기를 클릭하여 GUI를 엽니다 </gray><gray>[</gray><#8fe3b0>{command}</#8fe3b0><gray>]"
+    step2: "<gray>   2. 또는 플러그인 폴더의 </gray><#8fe3b0>{file} </#8fe3b0><gray>파일을 직접 편집하세요."
+    step3: "<gray>   3. 공식 문서 보기: </gray><#8fe3b0>{url}"
+    step4: "<gray>   4. 콘솔에서 </gray><#8fe3b0>{command} </#8fe3b0><gray>명령어로 추천 설정을 적용하세요."
+    footer: "<strikethrough><#d2b48c>{line}"
+
+  integrations:
+    name_colored: "<gold>{name}"
+    name: "플러그인 연동"
+    separator: "<gray>, "
+    none: "<gray>없음"
+
+  location:
+    locked_ago: "<dark_gray>{time} 전 잠김"
+    just_now: "방금 전"
+    empty_contents: "<dark_gray>비어 있음"
   update:
-    available:
-    up_to_date:
-  viaversion_detected:
-  viaversion_api_missing:
-  craftbukkit_unsupported:
-  integration_enabled:
-  startup_complete:
-  auto_reload_disabled:
-  boot_configuration:
-  boot_listeners:
-  boot_commands:
-  boot_startup_time:
-  boot_loaded:
-  boot_registered:
-  boot_hooked:
-  boot_not_installed:
-  boot_dialog_api:
-  boot_available:
-  boot_not_available:
-  recommended_console_only:
-  recommended_blocks_missing:
-  recommended_reload:
-  recommended_failed:
+    outdated: "<red>BlockProt 버전이 최신이 아닙니다! 새로운 안정 버전: {version}"
+    outdated_hotfix: "<red>중요: BlockProt 긴급 수정 핫픽스가 제공됩니다: {version}! 현재 릴리스({base_version})의 오류를 해결합니다. 클릭하여 다운로드하세요."
+    outdated_dev: "<yellow>BlockProt의 새로운 실험적 개발 빌드(BEDev)가 제공됩니다: {version}. 안정 버전이 아니며 GitHub에만 배포됩니다."
+    ahead: "<yellow>BlockProt Reloaded가 공식 배포 릴리스보다 앞선 버전입니다 ({version})"
+    ahead_hotfix: "<yellow>BlockProt Reloaded가 공식 배포 릴리스({base_version})보다 앞선 핫픽스 {version} 버전을 구동 중입니다"
+    up_to_date: "<green>BlockProt가 최신 버전입니다"
+    click_hint: "클릭하여 GitHub 릴리스 페이지로 이동합니다"
+
+console:
+  config_change_detected: "구성 파일 변경이 감지되었습니다. 다시 불러오는 중..."
+  config_reloaded: "구성을 자동으로 다시 불러왔습니다."
+  filewatcher_error: "파일 감시기 오류: {error}"
+  audit_logger_started: "감사 로거가 시작되었습니다."
+  audit_logger_failed: "감사 로거를 시작할 수 없습니다: {error}"
+  worldedit_listener_enabled: "WorldEdit 붙여넣기 자동 잠금 리스너가 활성화되었습니다."
+  worlds_yml_syntax_error: "worlds.yml에 YAML 구문 오류가 있어 기본값으로 복원합니다: {error}"
+  worlds_yml_restored: "내부 기본값으로 worlds.yml을 복원했습니다."
+  worlds_yml_restore_failed: "worlds.yml을 복원할 수 없습니다: {error}"
+  worlds_yml_save_failed: "worlds.yml을 저장할 수 없습니다: {error}"
+  backup_dir_failed: "백업 디렉터리를 생성할 수 없어 백업을 건너뜁니다."
+  backup_created: "기존 BlockProt 데이터가 발견되어 안전 백업을 생성했습니다: backups/{file}"
+  backup_review_config: "새로운 BPR 기능을 활성화하기 전에 config.yml을 검토하세요. 세부 정보는 세션 로그에 기록됩니다."
+  backup_failed: "백업 생성에 실패했습니다: {error}"
+  config_language_missing: "설정된 언어 파일이 존재하지 않습니다: {file}"
+  lang_keys_updated: "{file} 파일에 누락된 번역 키 {count}개를 업데이트했습니다."
+  lang_keys_save_failed: "병합된 언어 파일 {file} 저장에 실패했습니다: {error}"
+  config_keys_updated: "config.yml에 누락된 옵션 {count}개를 추가했습니다. 새 기능을 사용하기 전에 확인하세요."
+  config_keys_save_failed: "병합된 config.yml 저장에 실패했습니다: {error}"
+  mysql_enabled: "하이브리드 MySQL 색인이 활성화되었습니다."
+  mysql_disabled: "하이브리드 MySQL 색인이 비활성화되었습니다: {error}"
+  mysql_lookup_failed: "MySQL 신뢰 목록 조회 실패: {error}"
+  mysql_schema_failed: "MySQL 스키마 초기화 실패: {error}"
+  mysql_cache_load_failed: "MySQL 신뢰 캐시 로드 실패: {error}"
+  mysql_operation_failed: "MySQL 작업 실패: {error}"
+  translations_incomplete: "번역: {file}에 불완전한 키 {total}개 감지 (영어 대체 사용 {fallback}개, 양쪽 모두 누락 {missing}개). 세부 정보는 세션 로그에 기록됩니다."
+  java_too_old: "Java 버전이 너무 낮습니다: {version} (BlockProt Reloaded는 Java 25 이상이 필요합니다)"
+  minecraft_unsupported: "{edition} {version} 버전은 마인크래프트 {mc} 버전을 지원하지 않습니다. 버전 가이드를 확인하여 알맞은 BlockProt를 선택하세요: {guide} . 현재 버전에 권장되는 다운로드 {recommended} ({range}): {url}"
+  minecraft_unsupported_none: "마인크래프트 {mc} 버전을 지원하는 BlockProt 에디션이 없습니다. 지원 범위를 보려면 버전 가이드를 확인하세요: {guide}"
+  minecraft_newer_available: "마인크래프트 {mc} 버전이 {edition} ({edition_range}) 지원 범위보다 최신입니다. 버전 가이드를 확인하세요: {guide} . 해당 버전에 맞는 에디션: {recommended}: {url}"
+  edition_migration: "에디션 마이그레이션 감지: {from} -> {to}. 백업 위치: {path}"
+  edition_downgrade: "{to} 버전이 {from}보다 오래되었습니다. 다운그레이드는 지원되지 않습니다. 백업 위치: {path}"
+  about_edition: "{edition} {version} (마인크래프트 {range})"
+  not_paper: "Paper 환경이 아닙니다. 단독 Spigot 환경은 더 이상 지원되지 않습니다. 텍스트 입력 시 레거시 채팅 입력을 사용합니다. Paper 또는 호환 포크(Purpur, Folia)를 적극 권장합니다."
+  software_unsupported: "지원되지 않는 서버 소프트웨어 감지: {software}. BlockProt Reloaded는 Paper 및 Paper 호환 포크(Paper, Purpur, Folia, Pufferfish, Leaf 등)만 지원합니다."
+  dialogs_unavailable: "use_dialogs가 활성화되었으나 이 서버는 Paper 대화상자 API를 지원하지 않습니다 (Paper 1.21.7+ 필요). 인벤토리/채팅 메뉴로 대체합니다."
+  stats_save_failed: "통계 파일을 저장할 수 없습니다: {error}"
+  migration_start: "{source}에서 {target}(으)로 데이터를 마이그레이션하는 중..."
+  migration_done: "{source} 마이그레이션이 완료되었습니다. 이전 설정 및 블록 목록이 보존되었습니다."
+  migration_failed: "{source} 마이그레이션 실패: {error}"
+  saving_statistics: "통계 데이터를 디스크에 저장하는 중..."
+  update:
+    available: "새로운 안정 버전의 BlockProt Reloaded를 사용할 수 있습니다: {version}"
+    available_hotfix: "중요: BlockProt Reloaded 긴급 수정 핫픽스가 출시되었습니다: {version}! 현재 릴리스({base_version})의 버그를 수정합니다."
+    available_dev: "새로운 실험적 개발 빌드(BEDev)가 출시되었습니다: {version}. 안정 버전이 아니며 GitHub에만 배포됩니다."
+    up_to_date: "BlockProt Reloaded가 최신 상태입니다"
+  viaversion_detected: "ViaVersion {version} 감지됨. 다중 버전 클라이언트 지원이 활성화되었습니다."
+  viaversion_api_missing: "ViaVersion 플러그인이 설치되어 있으나 API 클래스를 찾을 수 없어 건너뜁니다."
+  craftbukkit_unsupported: "이 플러그인은 CraftBukkit을 지원하지 않습니다. Paper 또는 Paper 호환 포크를 사용해주세요."
+  integration_enabled: "플러그인 연동 활성화됨: {name}"
+  floodgate_prefix_detected: "Floodgate 사용자 이름 접두사 자동 감지: '{prefix}'"
+  floodgate_prefix_failed: "Floodgate 접두사 자동 감지 실패: {error}"
+  brigadier_register_failed: "Brigadier 명령어를 등록할 수 없습니다: {error}"
+  bedrock_form_send_failed: "베드락 폼 전송 실패 ({platform}): {error}"
+  raid_log: "습격 감지: {world} [{x},{y},{z}]의 {block}, 원인={actor}"
+  startup_complete: "BlockProt v{version} 활성화 완료."
+  auto_reload_disabled: "자동 다시 불러오기가 꺼져 있습니다 (auto_reload_configs: false). 설정을 수정한 후에는 /bp reload 명령어를 사용하세요."
+  boot_configuration: "구성"
+  boot_listeners: "이벤트 리스너"
+  boot_commands: "명령어"
+  boot_startup_time: "시동 시간"
+  boot_loaded: "로드됨"
+  boot_registered: "등록됨"
+  boot_hooked: "연동됨"
+  boot_not_installed: "설치되지 않음"
+  boot_dialog_api: "대화상자(Dialog) API"
+  boot_available: "사용 가능"
+  boot_not_available: "사용 불가"
+  boot_build_stable: "안정 릴리스 {version} 구동 중."
+  boot_build_hotfix: "현재 릴리스({base})의 핫픽스 {version} 구동 중."
+  boot_build_experimental: "실험적 개발 빌드(BEDev) {version} 구동 중. 안정 버전이 아니며 안전 백업이 생성되었습니다."
+  boot_update: "업데이트 확인"
+  boot_update_up_to_date: "최신 버전 ({version})"
+  boot_update_outdated: "새 버전 이용 가능: {version}"
+  boot_update_ahead: "최신 릴리스보다 앞선 빌드 ({version})"
+  boot_update_not_checked: "확인하지 않음"
+  boot_update_download: "다운로드: {url}"
+
+  recommended_console_only: "<#f0a0a0>✖ </#f0a0a0><gray>이 명령어는 관리자 권한이 필요합니다."
+  recommended_blocks_missing: "  <#f0a0a0>✖ </#f0a0a0><gray>blocks.yml 파일을 찾을 수 없습니다. 서버를 한 번 실행하여 파일을 생성하세요."
+  recommended_header: "<#d2b48c>[BlockProt] </#d2b48c><white>권장 설정 안내:"
+  recommended_usage_header: "<#d2b48c>[BlockProt] </#d2b48c><white>권장 설정 사용법:"
+  recommended_usage_apply: "  <#8fe3b0>● </#8fe3b0><white>/bp recommended <blocks|config|all> [force] </white><dark_gray>- </dark_gray><gray>권장 프리셋을 적용합니다."
+  recommended_usage_undo: "  <#a0c4e8>● </#a0c4e8><white>/bp recommended undo <blocks|config|all> </white><dark_gray>- </dark_gray><gray>프리셋을 기본 상태로 되돌립니다."
+  recommended_usage: "<gray>사용법: </gray><yellow>/bp recommended <blocks|config|all> [force]</yellow><gray> 또는 </gray><yellow>/bp recommended undo <blocks|config|all></yellow><gray>."
+  recommended_blocks_done: "  <#8fe3b0>● </#8fe3b0><gray>블록 목록: </gray><#8fe3b0>blocks.yml에 기록되었습니다.</#8fe3b0>"
+  recommended_config_done: "  <#8fe3b0>● </#8fe3b0><gray>설정 옵션: </gray><#8fe3b0>config.yml에 활성화되었습니다 </#8fe3b0><dark_gray>(modern_family_blocks, use_menus, use_dialogs)</dark_gray><gray>."
+  recommended_reload: "  <#a0c4e8>⏱ </#a0c4e8><gray>/bp reload 명령어로 다시 불러오거나 자동 반영을 기다리세요."
+  recommended_failed: "  <#f0a0a0>✖ </#f0a0a0><gray>{file} 파일 기록 실패: </gray><red>{error}"
+  recommended_already_applied: "  <#f3c27c>● </#f3c27c><gray>권장 {target} 설정이 이미 적용되어 있습니다. 강제 재적용: </gray><white>/bp recommended {target} force</white><gray>."
+  recommended_undo_header: "<#d2b48c>[BlockProt] </#d2b48c><white>권장 설정 되돌리기:"
+  recommended_undo_done: "  <#8fe3b0>● </#8fe3b0><gray>권장 {target} 설정을 기본 상태로 되돌렸습니다."
+  recommended_undo_nothing: "  <#f3c27c>● </#f3c27c><gray>권장 {target} 설정이 적용된 적이 없어 되돌릴 내용이 없습니다."
+
   first_start:
-    header:
-    title:
-    step1:
-    step2:
-    step3:
-    step4:
-    footer:
-  boot:
-    configuration:
-    listeners:
-    commands:
-    startup_time:
-    loaded:
-    registered:
-    hooked:
-    not_installed:
-  recommended_usage:
-  recommended_blocks_done:
-  recommended_config_done:
-  recommended_already_applied:
+    header: "<#d2b48c>  ------------------------------------------"
+    title: "<#d2b48c>   BlockProt Reloaded - 첫 시작 안내"
+    step1: "<gray>   1. </gray><#8fe3b0>{command} </#8fe3b0><gray>명령어로 잠금 가능한 블록을 설정하세요."
+    step2: "<gray>   2. 또는 플러그인 폴더의 </gray><#8fe3b0>{file} </#8fe3b0><gray>파일을 직접 수정하세요."
+    step3: "<gray>   3. 공식 문서 보기: </gray><#8fe3b0>{url}"
+    step4: "<gray>   4. 콘솔에서 </gray><#8fe3b0>{command} </#8fe3b0><gray>명령어로 권장 설정을 적용하세요."
+    footer: "<#d2b48c>  ------------------------------------------"
+
 dialogs:
   about:
-    title:
-    description:
-    maintainer:
-    report_issues:
-    version_label:
-    server_label:
-    api_label:
-    java_label:
-    issues_url:
-    credit_line:
-    db_engine_label:
-    db_mysql:
-    db_sqlite:
-    cache_label:
-    cache_suffix:
-    integrations_label:
-    integrations_disabled:
-    integrations_active:
+    title: "BlockProt Reloaded 정보"
+    description: "BlockProt Reloaded - spnda의 BlockProt를 기반으로 한 포크 플러그인입니다."
+    maintainer: "유지 관리: Zaynr (Zar)."
+    report_issues: "문제 신고:"
+    version_label: "버전: "
+    server_label: "서버: "
+    api_label: "API: "
+    java_label: "Java: "
+    issues_url: "github.com/VictorGugug/BlockProt-Reloaded/issues"
+    author_label: "원작자: spnda"
+    maintainer_label: "유지 관리자: Zaynr (Zar)"
+    db_engine_label: "데이터베이스 엔진: "
+    db_mysql: "MySQL"
+    db_sqlite: "SQLite"
+    cache_label: "캐시: "
+    cache_suffix: "개 보호 블록"
+    integrations_label: "연동 플러그인: "
+    integrations_disabled: "비활성화됨 (총 {count}개)"
+    integrations_active: "활성 ({total}개 중 {enabled}개: {names})"
   user_menu:
-    header:
+    header: "유저 메뉴"
   admin_menu:
-    header:
-    config_tooltip:
+    header: "관리자 메뉴"
+    config_tooltip: "config.yml 설정을 편집합니다"
+  admin_tiers:
+    title: "관리자 등급 및 역할"
+    header: "관리자 등급 및 역할"
+    subtitle: "온라인 플레이어를 선택하거나 이름을 입력하여 등급을 부여하세요"
+    set_offline_btn: "이름으로 플레이어 지정"
+    set_offline_tooltip: "플레이어 이름 또는 UUID 입력"
+    assign_title: "역할 부여: {player}"
+    assign_prompt: "{player}님의 관리자 등급을 선택하세요:"
+    current_tier: "현재 등급: {tier}"
+    status_op: "서버 관리자 (OP)"
+    status_not_op: "일반 플레이어"
+    custom_config_btn: "커스텀 권한 설정"
+    custom_config_tooltip: "{player}님의 세부 권한을 설정합니다"
+    custom_flags_title: "세부 권한 설정: {player}"
+    custom_flags_header: "세부 관리 권한"
+    custom_flags_subtitle: "{player}님의 관리자 권한 항목을 토글하세요:"
   settings:
-    header:
-    auto_lock_desc:
-    hints_desc:
-    notifications_desc:
-    prefer_dialogs:
-    prefer_dialogs_desc:
+    header: "개인 설정"
+    auto_lock_desc: "블록을 설치할 때 자동으로 잠급니다."
+    hints_desc: "잠긴 블록에 대한 액션바 힌트를 표시합니다."
+    notifications_desc: "누군가 내 블록에 접근할 때 알림을 받습니다."
+    prefer_dialogs: "Paper 대화상자 사용"
+    prefer_dialogs_desc: "인벤토리 GUI 대신 최신 Paper 대화상자(Dialog) 창을 사용합니다."
+    prefer_bedrock_forms: "베드락 폼 사용"
+    prefer_bedrock_forms_desc: "인벤토리 GUI 대신 네이티브 베드락 폼 화면을 사용합니다."
+    colorblind_desc: "구분이 쉬운 고대비 기호로 상태를 표시합니다."
   friends:
-    header:
-    manage_hint:
-    public_make:
-    public_current:
-    private_current:
-    public_click:
-    private_click:
-    no_history:
-    recent_searches:
+    header: "친구 관리"
+    manage_hint: "기본 친구 목록을 관리합니다:"
+    select_candidate_hint: "어떤 플레이어를 찾으시나요? 후보를 선택하세요:"
+    select_candidate_score: "일치율: {score}%"
+    public_make: "공용으로 전환"
+    public_current: "현재 상태: 공용"
+    private_current: "현재 상태: 비공개"
+    public_click: "클릭하면 모든 플레이어가 내 블록을 이용할 수 있습니다."
+    private_click: "클릭하면 내 블록이 비공개로 전환됩니다."
+    no_history: "검색 기록이 없습니다."
+    recent_searches: "최근 검색 기록:"
+    level_label: "권한 레벨: {level}"
+    level_basic: "레벨 1: 기본 (넣기 및 꺼내기)"
+    level_basic_desc: "아이템을 넣고 꺼낼 수 있지만, 블록 설정 메뉴는 열 수 없습니다."
+    level_operator: "레벨 2: 오퍼레이터"
+    level_operator_desc: "아이템 이용 및 블록 설정(레드스톤, 깔때기, 이름, 로그, 검사 등)을 열 수 있습니다."
+    level_manager: "레벨 3: 총괄 관리자"
+    level_manager_desc: "블록 설정 및 친구 관리 권한을 모두 가집니다. (잠금 해제 및 이전 불가)"
+    level_custom: "레벨 4: 커스텀"
+    level_custom_desc: "이 플레이어에게 부여할 세부 접근 권한을 직접 설정합니다."
+    flag_open_menu: "설정 메뉴 열기"
+    flag_edit_settings: "블록 설정 변경"
+    flag_edit_name: "블록 이름 변경"
+    flag_view_audit: "접근 로그 확인"
+    flag_inspect: "내용물 검사"
+    flag_manage_friends: "친구 관리"
+    flag_open_container: "보관함 열기"
+    flag_deposit: "아이템 넣기"
+    flag_withdraw: "아이템 꺼내기"
+    flag_redstone: "레드스톤 이용"
   stats:
-    header:
-    your_blocks:
-    no_blocks:
-    breakdown:
-    server_total:
-    placements_title:
+    header: "보호 통계"
+    your_blocks: "보호 중인 내 블록: "
+    no_blocks: "  (없음)"
+    breakdown: "블록별 세부 내역:"
+    server_total: "서버 전체 보호 블록: "
+    placements_title: "배치된 블록"
   integrations:
-    count:
-    enabled:
-    disabled:
-    plugin:
-    dependent:
+    count: "{total}개 중 {enabled}개 활성화"
+    enabled: "<green>활성화됨"
+    disabled: "<gray>비활성화됨"
+    plugin: "플러그인: {name}"
+    dependent: "의존 대상: {name}"
   lockables:
-    header:
-    cat_prefix:
+    header: "잠금 가능 블록"
+    cat_prefix: "카테고리: "
     categories:
-      chests:
-      shulkers:
-      furnaces:
-      storage:
-      signs:
-      doors:
-      trapdoors:
-      beds:
-      gates:
-      workstations:
-      interactive:
-      entities:
+      chests: "상자"
+      shulkers: "셜커 상자"
+      furnaces: "화로"
+      storage: "보관함"
+      signs: "표지판"
+      doors: "문"
+      trapdoors: "다락문"
+      beds: "침대"
+      gates: "울타리 문"
+      workstations: "직업 블록"
+      interactive: "상호작용 블록"
+      entities: "엔티티"
+  auto_drop:
+    search_prompt: "블록 이름을 입력하세요"
   info:
-    header:
-    protected_blocks:
+    header: "블록을 소유한 플레이어"
+    protected_blocks: "보호 중인 블록 소유자: "
+    block_list_title: "블록 목록: {player}"
   unlock:
-    header:
-    click_hint:
-    location:
-    material_label:
-    owner_label:
-    friends_label:
-    player_not_found:
-    no_blocks:
-    unlocked:
-    not_owned:
-    failed:
+    header: "블록 잠금 해제"
+    click_hint: "클릭하여 이 블록의 잠금을 해제합니다."
+    location: "위치: "
+    material_label: "종류: "
+    owner_label: "소유자: "
+    friends_label: "친구 수: "
+    player_not_found: "플레이어를 찾을 수 없습니다: {player}"
+    no_blocks: "{player}님의 보호된 블록이 없습니다."
+    unlocked: "{location} 좌표의 블록 잠금을 해제했습니다."
+    not_owned: "해당 블록은 {player}님의 소유가 아닙니다."
+    failed: "블록 잠금 해제에 실패했습니다."
   protdel:
-    header:
-    world_hint:
-    confirm:
-    cancel:
-    blocks_suffix:
-    undo_label:
-    undo_title:
-    no_history:
-    restore_hint:
-    cant_undo:
-    deleting:
+    header: "보호 데이터 삭제"
+    world_hint: "{world} 월드의 모든 블록 보호를 삭제합니다."
+    confirm: "확인 - 모두 삭제"
+    cancel: "취소"
+    blocks_suffix: "개 블록"
+    undo_label: "되돌리기 ({count}개 가능)"
+    undo_title: "삭제 되돌리기"
+    no_history: "되돌릴 기록이 없습니다."
+    restore_hint: "클릭하여 {count}개의 블록 보호를 복원합니다."
+    cant_undo: "이 작업은 되돌릴 수 없습니다!"
+    deleting: "{world} 월드의 보호 데이터를 삭제하는 중..."
+  world_expiry:
+    header: "월드별 만료"
+    active_label: "활성 기간: {duration}"
+    disabled_label: "비활성화됨"
+    click_hint: "클릭하여 만료 기간을 설정합니다."
   update:
-    title:
-    current:
-    latest:
-    outdated:
-    ahead:
-    up_to_date:
-    check_hint:
-    check_now:
-    checking:
-    download:
-    version_prefix:
-    latest_link_label:
+    title: "업데이트 확인기"
+    current: "현재 버전:"
+    latest: "최신 버전:"
+    outdated: "구버전"
+    ahead: "최신보다 앞선 빌드"
+    up_to_date: "최신 상태"
+    kind_hotfix: "<red>중요: {base_version} 버전의 긴급 수정(핫픽스): {version}"
+    kind_dev: "<yellow>실험적 개발 빌드 (BEDev) - 안정 버전이 아닙니다"
+    kind_stable: "<green>{version} 안정 릴리스"
+    check_hint: "'지금 확인'을 눌러 업데이트를 조회하세요."
+    check_now: "지금 확인"
+    checking: "업데이트 확인 중..."
+    download: "다운로드:"
+    version_prefix: " v"
   debug:
-    title:
-    label_plugin:
-    label_server:
-    label_api:
-    label_java:
-    run_separator:
-  choose_option:
-  admin_choose:
-  click_to_open:
-  back:
-  close:
-  page:
-  prev:
-  next:
-  prev_hint:
-  next_hint:
-  status_label:
-  status_public:
-  status_private:
-  status_enabled:
-  status_disabled:
-  switch_view:
-  click_disable:
-  click_enable:
-  click_chat:
-  return_user_menu:
-  return_admin_menu:
-  return_previous:
-  category_label:
+    title: "디버그 정보"
+    label_plugin: "BlockProt "
+    label_server: "서버: "
+    label_api: "API: "
+    label_java: "Java: "
+    run_separator: "=== /bp debug 실행 ==="
+  choose_option: "옵션을 선택하세요:"
+  admin_choose: "관리자 작업을 선택하세요:"
+  click_to_open: "클릭하여 엽니다."
+  back: "← 뒤로"
+  close: "← 닫기"
+  page: "{current}/{total} 페이지"
+  prev: "◀ 이전"
+  next: "다음 ▶"
+  prev_hint: "이전 페이지입니다."
+  next_hint: "다음 페이지입니다."
+  status_label: "상태: "
+  status_public: "공용"
+  status_private: "비공개"
+  status_enabled: "활성화됨"
+  status_disabled: "비활성화됨"
+  switch_view: "보기 전환."
+  click_disable: "클릭하여 모두 비활성화합니다."
+  click_enable: "클릭하여 모두 활성화합니다."
+  click_disable_single: "클릭하여 비활성화합니다."
+  click_enable_single: "클릭하여 활성화합니다."
+  click_chat: "클릭하여 채팅창에서 세부 정보를 봅니다."
+  return_user_menu: "유저 메뉴로 돌아갑니다."
+  return_admin_menu: "관리자 메뉴로 돌아갑니다."
+  return_previous: "이전 메뉴로 돌아갑니다."
+
+  category_label: "카테고리: "
+
   admin_config:
-    title:
-    header:
-    hint:
-    cat_general:
-    cat_general_desc:
-    cat_protection:
-    cat_protection_desc:
-    cat_mechanics:
-    cat_mechanics_desc:
-    cat_limits:
-    cat_limits_desc:
-    cat_notifications:
-    cat_notifications_desc:
-    cat_language:
-    cat_worlds:
-    cat_players:
-    cat_blocks:
-    cat_entity:
-    cat_expiry:
-    cat_raid:
-    cat_maintenance:
-    cat_deprecated:
-    value_bool:
-    value_cycle:
-    value_click_edit:
-    dialog_marker:
-    return_categories:
-    config_yml_prefix:
-    value_current:
-    enter_new_value:
-    new_value_prompt:
-    invalid_number:
-    confirm_value:
-    lock_on_place:
-    public_is_friend:
-    redstone_disallowed:
-    auto_reload:
-    toggle_lang:
-    protect_explosions:
-    piston_movement:
-    shulker_break:
-    allow_break:
-    spawn_protection:
-    simplified_hopper:
-    lock_effects:
-    lock_sounds:
-    world_expiry:
-    entity_protection:
-    backups:
-    session_log:
-    max_blocks:
-    hint_cooldown:
-    friend_search:
-    notify_updates:
-    owner_notifications:
+    title: "관리자 구성"
+    hint: "수정할 config.yml 섹션을 선택하세요:"
+    cat_notifications: "알림"
+    cat_language: "언어"
+    cat_worlds: "월드"
+    cat_players: "플레이어 및 친구"
+    cat_blocks: "블록 및 잠금 동작"
+    cat_entity: "엔티티 보호"
+    cat_expiry: "보호 만료"
+    cat_raid: "습격 감지"
+    cat_maintenance: "유지보수"
+    cat_deprecated: "지원 중단된 설정"
+    value_bool: "클릭하여 전환합니다."
+    value_cycle: "클릭하여 순환 전환합니다:"
+    value_click_edit: "클릭하여 값을 편집합니다."
+    dialog_marker: "[ 대화상자 전용 설정 ]"
+    return_categories: "구성 카테고리로 돌아갑니다."
+    config_yml_prefix: "config.yml: "
+    value_current: "현재 값: "
+    enter_new_value: "<gray>현재 {key}: </gray><white>{value} </white><gray>- 새 값을 입력하세요:"
+    new_value_prompt: "새 {key}"
+    invalid_number: "<red>올바르지 않은 숫자입니다: {input}"
+    confirm_value: "확인"
     language:
-      language_file:
-      toggle_category:
-      toggle_hint:
-      selector_category:
-      selector_hint:
-      replace_translations:
-      fallback_string:
-      fallback_string_hint:
-      status_header:
-      toggle_all_enable:
-      toggle_all_disable:
-      toggle_all_hint:
-      lang_status:
-      config_status_active:
-      config_status_inactive:
-      click_disable:
-      click_enable:
-      active_marker:
-      replace_translations_title:
-      fallback_string_title:
+      language_file: "번역에 사용할 언어 파일입니다."
+      toggle_category: "언어 활성화 / 비활성화"
+      toggle_hint: "서버 시작 시 로드할 언어를 토글합니다."
+      selector_category: "활성 언어 선택"
+      selector_hint: "사용할 언어 파일을 선택합니다."
+      replace_translations: "누락된 번역 키를 자동으로 업데이트합니다."
+      replace_translations_title: "번역 파일 자동 갱신"
+      fallback_string: "번역 키가 누락되었을 때 표시할 기본 텍스트입니다."
+      fallback_string_title: "대체 문자열"
+      fallback_string_hint: "대체 텍스트"
+      status_header: "활성  비활성  config.yml의 [ACTIVE]"
+      toggle_all_enable: "lang.yml의 모든 언어 활성화"
+      toggle_all_disable: "lang.yml의 모든 언어 비활성화"
+      toggle_all_hint: "클릭하여 모든 언어를 토글합니다"
+      lang_status: "lang.yml: {status}"
+      config_status_active: "활성 상태"
+      config_status_inactive: "비활성 상태"
+      click_disable: "클릭하여 비활성화"
+      click_enable: "클릭하여 활성화"
+      active_marker: "[ACTIVE]"
     worlds:
-      per_worlds_config:
-      excluded_worlds:
-      excluded_worlds_hint:
-      excluded_worlds_empty:
-      per_worlds_config_title:
-      excluded_worlds_title:
+      per_worlds_config: "월드별로 별도 구성을 적용합니다."
+      per_worlds_config_title: "월드별 구성"
+      excluded_worlds: "플러그인이 완전히 비활성화되는 월드 목록입니다."
+      excluded_worlds_title: "제외된 월드"
+      excluded_worlds_hint: "쉼표로 구분된 월드 이름, 없으면 공백"
+      excluded_worlds_empty: "(없음)"
     players:
-      lock_on_place:
-      public_is_friend:
-      max_blocks:
-      max_blocks_hint:
-      hint_cooldown:
-      hint_cooldown_hint:
-      friend_search:
-      friend_search_hint:
-      disable_friends:
-      lock_on_place_title:
-      public_is_friend_title:
-      max_blocks_title:
-      hint_cooldown_title:
-      friend_search_title:
-      disable_friends_title:
+      lock_on_place: "블록 설치 시 자동으로 잠급니다."
+      lock_on_place_title: "설치 시 자동 잠금"
+      public_is_friend: "공용 블록을 친구로 간주합니다."
+      public_is_friend_title: "공용을 친구로 처리"
+      max_blocks: "플레이어당 최대 잠금 가능 블록 수입니다 (-1 = 무제한)."
+      max_blocks_title: "최대 잠금 블록 수"
+      max_blocks_hint: "최대 블록 수 (-1 = 무제한)"
+      hint_cooldown: "잠금 힌트 표시 쿨다운(초)입니다."
+      hint_cooldown_title: "잠금 힌트 쿨다운"
+      hint_cooldown_hint: "쿨다운 (초)"
+      friend_search: "친구 이름 검색 유사도 기준치입니다 (0.0-1.0)."
+      friend_search_title: "친구 검색 유사도"
+      friend_search_hint: "유사도 (0.0 - 1.0)"
+      disable_friends: "친구 시스템을 전역적으로 비활성화합니다."
+      disable_friends_title: "친구 시스템 비활성화"
+      bedrock_prefixes: "베드락(Geyser/Floodgate) 플레이어로 취급할 이름 접두사입니다."
+      bedrock_prefixes_title: "베드락 접두사"
+      bedrock_prefixes_hint: "쉼표로 구분된 접두사 (예: ., *, _)"
     blocks:
-      modern_family:
-      redstone_disallowed:
-      simplified_hopper:
-      protect_explosions:
-      piston_movement:
-      shulker_break:
-      allow_break:
-      spawn_protection:
-      lock_effects:
-      lock_sounds:
-      use_menus_de:
-      use_dialogs_de:
-      timed_access:
-      timed_access_hint:
-      modern_family_title:
-      redstone_disallowed_title:
-      simplified_hopper_title:
-      protect_explosions_title:
-      piston_movement_title:
-      shulker_break_title:
-      allow_break_title:
-      spawn_protection_title:
-      lock_effects_title:
-      lock_sounds_title:
-      use_menus_title:
-      use_dialogs_title:
-      timed_access_title:
+      modern_family: "blocks.yml에서 간결한 계열(Family) 구문을 사용합니다."
+      modern_family_title: "최신 계열 구문 사용"
+      redstone_disallowed: "기본적으로 레드스톤 상호작용을 차단합니다."
+      redstone_disallowed_title: "레드스톤 기본 차단"
+      simplified_hopper: "성능 향상을 위한 간소화된 깔때기 로직을 사용합니다."
+      simplified_hopper_title: "간소화된 깔때기 로직"
+      protect_explosions: "잠긴 블록을 폭발로부터 보호합니다."
+      protect_explosions_title: "폭발 보호"
+      piston_movement: "피스톤이 잠긴 블록을 밀거나 당기지 못하게 방지합니다."
+      piston_movement_title: "피스톤 이동 방지"
+      shulker_break: "셜커 상자가 파괴될 때 잠금 데이터를 제거합니다."
+      shulker_break_title: "셜커 파괴 시 잠금 해제"
+      allow_break: "보호된 블록 파괴를 허용합니다 (보호 데이터는 유지)."
+      allow_break_title: "보호 블록 파괴 허용"
+      spawn_protection: "기본 스폰 보호 구역을 존중합니다."
+      spawn_protection_title: "스폰 보호 존중"
+      lock_effects: "잠긴 블록에 입자 효과를 표시합니다."
+      lock_effects_title: "잠금 입자 효과"
+      lock_sounds: "잠긴 블록과 상호작용 시 소리를 재생합니다."
+      lock_sounds_title: "잠금 사운드"
+      use_menus_de: "명령어를 /bp user 및 /bp admin으로 통합합니다."
+      use_menus_title: "통합 메뉴 시스템 사용"
+      use_dialogs_de: "Paper 대화상자 시스템을 사용합니다 (Paper 1.21.7+ 필요)."
+      use_dialogs_title: "Paper 대화상자 사용"
+      timed_access: "기간제 접근 최대 허용 기간(일)입니다."
+      timed_access_title: "최대 기간제 접근 기간"
+      timed_access_hint: "최대 일수"
+      action_bar_duration: "액션바 메시지를 표시할 시간(초)입니다."
+      action_bar_duration_title: "액션바 표시 시간"
+      action_bar_duration_hint: "초 (최소 1초)"
+      locking_title: "잠금 방식"
+      behavior_title: "동작 방식"
+      effects_title: "효과"
     entity:
-      protection_enabled:
-      auto_protect_tame:
-      workstation_enabled:
-      workstation_radius:
-      workstation_radius_hint:
-      workstation_vertical_radius:
-      workstation_vertical_radius_hint:
-      villager_locate_seconds:
-      villager_locate_seconds_hint:
-      menu_item:
-      menu_item_hint:
-      menu_item_invalid:
-      protection_enabled_title:
-      auto_protect_tame_title:
-      workstation_enabled_title:
-      workstation_radius_title:
-      workstation_vertical_radius_title:
-      villager_locate_seconds_title:
-      menu_item_title:
+      protection_enabled: "엔티티 보호를 활성화합니다."
+      protection_enabled_title: "엔티티 보호"
+      auto_protect_tame: "엔티티 길들임 시 자동으로 보호합니다."
+      auto_protect_tame_title: "길들임 시 자동 보호"
+      workstation_enabled: "주민 직업 블록을 자동으로 보호합니다."
+      workstation_enabled_title: "주민 직업 블록 보호"
+      workstation_radius: "직업 블록 보호 수평 반경입니다."
+      workstation_radius_title: "직업 블록 수평 반경"
+      workstation_radius_hint: "수평 반경 (블록)"
+      workstation_vertical_radius: "직업 블록 보호 수직 반경입니다."
+      workstation_vertical_radius_title: "직업 블록 수직 반경"
+      workstation_vertical_radius_hint: "수직 반경 (블록)"
+      villager_locate_seconds: "주민 위치 추적 제한 시간(초)입니다."
+      villager_locate_seconds_title: "주민 추적 제한 시간"
+      villager_locate_seconds_hint: "추적 제한 시간 (초)"
+      menu_item: "엔티티 보호 메뉴를 여는 데 사용할 도구 아이템입니다."
+      menu_item_title: "엔티티 메뉴 도구"
+      menu_item_hint: "아이템 이름 (예: STICK)"
+      menu_item_invalid: "<red>알 수 없는 아이템입니다: {input}"
     expiry:
-      enabled:
-      check_interval:
-      check_interval_hint:
-      enabled_title:
-      check_interval_title:
+      enabled: "비활성 보호 블록의 전역 만료를 활성화합니다."
+      enabled_title: "월드 만료 활성화"
+      check_interval: "만료 검사 주기(분)입니다."
+      check_interval_title: "만료 검사 주기"
+      check_interval_hint: "검사 간격 (분)"
+      per_world: "월드별로 만료 기간을 다르게 설정합니다."
+      per_world_title: "월드별 만료 기간"
     raid:
-      enabled:
-      enabled_title:
+      enabled: "습격 몹으로부터 블록을 보호합니다."
+      enabled_title: "습격 보호"
     notifications:
-      notify_ops:
-      owner_enabled:
-      owner_open:
-      owner_take:
-      owner_place:
-      notify_ops_title:
-      owner_enabled_title:
+      notify_ops: "새 업데이트가 있으면 관리자에게 알립니다."
+      notify_ops_title: "관리자 업데이트 알림"
+      owner_enabled: "소유자 접근 알림을 허용합니다."
+      owner_enabled_title: "소유자 접근 알림"
+      owner_open: "누군가 내 블록을 열었을 때 알립니다."
+      owner_open_title: "열기 알림"
+      owner_take: "누군가 내 블록에서 아이템을 꺼낼 때 알립니다."
+      owner_take_title: "아이템 꺼냄 알림"
+      owner_place: "누군가 내 블록에 아이템을 넣을 때 알립니다."
+      owner_place_title: "아이템 넣음 알림"
     maintenance:
-      inactivity_cleanup:
-      inactivity_cleanup_hint:
-      auto_reload:
-      session_log:
-      backups:
-      inactivity_cleanup_title:
-      auto_reload_title:
-      auto_reload_delay:
-      auto_reload_delay_title:
-      auto_reload_delay_hint:
-      session_log_title:
-      backups_title:
+      inactivity_cleanup: "미접속자 보호 삭제 기한(일)입니다 (-1 = 끄기)."
+      inactivity_cleanup_title: "미접속자 정리"
+      inactivity_cleanup_hint: "일수 (-1 = 비활성화)"
+      auto_reload: "파일 변경 시 구성을 자동으로 다시 불러옵니다."
+      auto_reload_title: "구성 자동 다시 불러오기"
+      auto_reload_delay: "자동 다시 불러오기 대기 시간(0-5초)입니다."
+      auto_reload_delay_title: "자동 불러오기 지연 시간"
+      auto_reload_delay_hint: "지연 초 (0~5초, 0 = 즉시)"
+      session_log: "세션 로깅을 활성화합니다."
+      session_log_title: "세션 로그 기록"
+      backups: "자동 안전 백업을 생성합니다."
+      backups_title: "자동 백업"
+      admin_tiers: "관리자 등급 및 권한 제한 설정을 활성화합니다."
+      admin_tiers_title: "관리자 등급 (Admin Tiers)"
     deprecated:
-      we_paste_enabled:
-  click_disable_single:
-  click_enable_single:
+      we_paste_enabled: "WorldEdit 붙여넣기 시 자동 잠금입니다."
+
+worlds:
+  scan_start: "월드를 검색하는 중... ({count}개 로드됨)"
+  scan_complete: "월드 검색 완료: {count}개 월드 감지됨, {added}개 월드가 worlds.yml에 추가되었습니다. 세션 로그를 확인하세요."
+  status: "상태"
+  protected_count: "보호된 블록"
+  no_worlds: "월드를 찾을 수 없습니다."
+  world_config_hint: "개별 월드 구성 적용됨"
+  per_world_config: "월드별 설정"
+  worlds: "월드"
+  configured: "구성 완료됨"
+
+integrations:
+  lands:
+    protect_containers_flag_name: "보관함 보호 (BlockProt)"
+    protect_containers_desc: "플레이어가 상자, 화로 등을 보호할 수 있도록 허용합니다."
+    require_protect_for_friends_flag_name: "친구 등록 시 \"보관함 보호\" 권한 요구 (BlockProt)"
+    require_protect_for_friends_desc: "\"보관함 보호\" 플래그 권한이 있는 플레이어만 친구로 등록할 수 있습니다."
+
+help:
+  header: "<gold>=== </gold><white>BlockProt </white><gray>도움말 </gray><gold>==="
+  footer: "<gold>========================="
+  block_protection_title: "<gold>► 블록 보호"
+  block_protection_settings: "<gray>  잠금 가능한 블록을 웅크린 상태로 우클릭하여 잠금 메뉴를 엽니다."
+  friends_title: "<gold>► 친구 관리"
+  friends_gui: "<gray>  /bp friends </gray><white>- 기본 친구 관리 메뉴를 엽니다."
+  friends_addall: "<gray>  /bp friends addall <플레이어> </gray><white>- 내 모든 블록에 해당 친구를 추가합니다."
+  transfer: "<gray>  /bp transferall <플레이어> </gray><white>- 내가 보호 중인 모든 블록을 다른 플레이어에게 이전합니다."
+  timed_access: "<gray>  /bp timed <플레이어> <초> </gray><white>- 바라보고 있는 잠긴 블록에 임시 접근 권한을 부여합니다."
+  admin_info: "<gray>  /bp info <플레이어> </gray><white>- 플레이어의 보호 블록 목록 GUI를 엽니다."
+  other_title: "<gold>► 기타 명령어"
+  settings: "<gray>  /bp settings </gray><white>- 개인 설정 메뉴를 엽니다."
+  stats: "<gray>  /bp stats </gray><white>- 내 보호 블록 통계를 확인합니다."
+  about: "<gray>  /bp about </gray><white>- 플러그인 및 포크 정보를 확인합니다."
+  integrations: "<gray>  /bp integrations </gray><white>- 활성화된 플러그인 연동 목록을 표시합니다."
+  update: "<gray>  /bp update </gray><white>- 플러그인 업데이트를 확인합니다."
+  reload: "<gray>  /bp reload </gray><white>- 구성 및 번역 파일을 다시 불러옵니다."
+  disable_hints: "<gray>  /bp disablehints </gray><white>- 블록 설치 보호 힌트 메시지를 끕니다."
+  debug: "<gray>  /bp debug <run|...> </gray><white>- 개발자 진단 도구를 실행합니다."
+  unlock: "<gray>  /bp unlock <플레이어> </gray><white>- 특정 플레이어의 블록 잠금 해제 GUI를 엽니다."
+  lockables: "<gray>  /bp lockables </gray><white>- 잠금 가능한 블록 목록을 탐색 및 토글합니다."
+  recommended: "<gray>  /bp recommended <blocks|config|all> [force] </gray><white>- 권장 blocks.yml 목록, config.yml 설정 또는 전체를 적용합니다."
+  logs: "<gray>  /bp logs [here|player <이름>|<페이지>] </gray><white>- 접근 감사 로그를 확인합니다."
+  logs_desc: "필터 및 페이지 기능을 이용해 접근 감사 로그를 확인합니다."
+  world_prot_del: "<gray>  /bp protdel [월드] </gray><white>- 해당 월드의 모든 보호 데이터를 삭제합니다."
+  gui_mode_title: "<gold>► GUI 메뉴 모드"
+  gui_user: "<gray>  /bp user  </gray><white>- 유저 메뉴 열기 (설정, 친구, 통계, 정보)"
+  gui_admin: "<gray>  /bp admin </gray><white>- 관리자 메뉴 열기 (리로드, 업데이트, 연동, 통계, 디버그, 정보, 잠금 설정)"
+
+admin_action:
+  info:
+    name: "정보 및 검사"
+    desc: "블록 및 플레이어의 보호 정보를 확인합니다."
+  teleport:
+    name: "순간이동"
+    desc: "보호된 블록 및 위치로 순간이동합니다."
+  logs:
+    name: "보호 로그"
+    desc: "보호 블록의 접근 로그를 확인합니다."
+  break:
+    name: "보호 블록 파괴 바이패스"
+    desc: "다른 플레이어가 소유한 보호 블록을 파괴합니다."
+  unlock:
+    name: "강제 잠금 해제"
+    desc: "다른 플레이어의 블록 보호를 해제합니다."
+  lockables:
+    name: "잠금 가능 블록 설정"
+    desc: "서버 전체의 잠금 가능한 블록 종류를 구성합니다."
+  container_bypass:
+    name: "보관함 바이패스"
+    desc: "잠긴 보관함을 열고 상호작용합니다."
+  protdel:
+    name: "월드 보호 데이터 삭제"
+    desc: "월드 단위로 보호된 블록을 일괄 삭제합니다."
+  config:
+    name: "구성 편집"
+    desc: "플러그인 구성 및 설정을 수정합니다."
+  debug:
+    name: "디버그 진단"
+    desc: "시스템 진단 및 테스트를 실행합니다."
+  reload:
+    name: "플러그인 다시 불러오기"
+    desc: "플러그인 구성 파일을 다시 불러옵니다."
+  update:
+    name: "플러그인 업데이트"
+    desc: "플러그인 업데이트를 확인하고 관리합니다."
+  integrations:
+    name: "플러그인 연동"
+    desc: "서드파티 플러그인 연동 상태를 확인합니다."
+  recommended:
+    name: "권장 기본값 적용"
+    desc: "권장 서버 구성을 적용합니다."
+  setrole:
+    name: "역할 부여"
+    desc: "플레이어에게 관리자 등급 및 역할을 지정합니다."

@@ -159,6 +159,11 @@ public final class UnlockDialog {
                             show(p, backOrigin, targetName, safePage);
                         }
                     } else {
+                        if (!de.sean.blockprot.bukkit.admin.AdminTierManager.hasPermission(p, de.sean.blockprot.bukkit.admin.AdminAction.UNLOCK)) {
+                            ComponentMessages.send(p, Component.text(
+                                stripColor(Translator.get(TranslationKey.MESSAGES__NO_PERMISSION)), PASTEL_CORAL));
+                            return;
+                        }
                         try {
                             var block = loc.getWorld().getBlockAt(loc);
                             var handler = new BlockNBTHandler(block);

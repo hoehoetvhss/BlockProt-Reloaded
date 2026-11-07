@@ -348,10 +348,6 @@ public class BlockEventListener implements Listener {
                         return;
                     }
 
-                    new PlayerSettingsHandler(event.getPlayer()).getFriendsStream()
-                        .filter(fh -> PluginIntegration.filterFriendByUuidForAll(UUID.fromString(fh.getName()), event.getPlayer(), block))
-                        .forEach(handler::addFriend);
-
                     ComponentMessages.sendActionBar(event.getPlayer(),
                         LegacyComponentSerializer.legacySection().deserialize(
                             Translator.get(TranslationKey.MESSAGES__LOCK_ON_PLACE_SUCCESS)

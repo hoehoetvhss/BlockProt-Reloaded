@@ -70,15 +70,15 @@ public final class BlockProtCommand implements TabExecutor {
         cli("transferall",  new TransferCommand());
         cli("about",        new AboutCommand());
         cli("disablehints", new HintsCommand());
-        cli("info",         new InfoCommand());
-        cli("reload",       new ReloadCommand());
-        cli("update",       new UpdateCommand());
-        cli("integrations", new IntegrationsCommand());
-        cli("debug",        new DebugCommand());
-        cli("unlock",       new AdminUnlockCommand());
-        cli("protdel",      new WorldProtDeleteCommand());
-        cli("logs",         new LogsCommand());
 
+        admin("info",        new InfoCommand());
+        admin("reload",      new ReloadCommand());
+        admin("update",      new UpdateCommand());
+        admin("integrations", new IntegrationsCommand());
+        admin("debug",       new DebugCommand());
+        admin("unlock",      new AdminUnlockCommand());
+        admin("protdel",     new WorldProtDeleteCommand());
+        admin("logs",        new LogsCommand());
         admin("lockables",   new LockablesCommand());
         admin("recommended", new RecommendedCommand());
         admin("tiers",       new TiersCommand());

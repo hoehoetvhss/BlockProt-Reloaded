@@ -27,6 +27,7 @@ import de.sean.blockprot.bukkit.admin.AdminTierManager;
 import de.sean.blockprot.bukkit.config.BlockFamilyParser;
 import de.sean.blockprot.bukkit.events.BlockProtLockEvent;
 import de.sean.blockprot.bukkit.events.BlockProtUnlockEvent;
+import de.sean.blockprot.bukkit.integrations.PluginIntegration;
 import de.sean.blockprot.bukkit.listeners.HopperEventListener;
 import de.sean.blockprot.bukkit.nbt.stats.PlayerBlocksStatistic;
 import de.sean.blockprot.bukkit.storage.HybridDatabase;
@@ -383,6 +384,11 @@ public final class BlockNBTHandler extends FriendSupportingHandler<NBTCompound> 
 
             setOwner(playerUuid);
             container.setLong(LOCKED_AT_ATTRIBUTE, System.currentTimeMillis());
+            if (!BlockProt.getDefaultConfig().isFriendFunctionalityDisabled()) {
+                new PlayerSettingsHandler(player).getFriendsStream()
+                    .filter(fh -> PluginIntegration.filterFriendByUuidForAll(UUID.fromString(fh.getName()), player, block))
+                    .forEach(this::addFriend);
+            }
             this.applyToOtherContainer();
             StatHandler.addBlock(player, block.getLocation());
             HybridDatabase hybridDatabase = BlockProt.getHybridDatabase();
